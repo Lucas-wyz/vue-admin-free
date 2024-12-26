@@ -27,6 +27,18 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/500',
+    name: 'Error500',
+    component: () => import('@/views/error/500.vue'),
+    meta: { title: '服务器错误' },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import('@/views/error/404.vue'),
+    meta: { title: '页面不存在' },
+  },
 ]
 
 const router = createRouter({
