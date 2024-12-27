@@ -1,5 +1,5 @@
 export { userApi } from './modules/user'
-export type { User } from './types/user'
+export type { User, UserListResponse, UserFormData } from './types/user'
 export type { Question, Option } from './types/question'
 export type { ApiResponse, ApiPromise } from './constants/responseCode'
 export { request, source as cancelTokenSource } from './request'
