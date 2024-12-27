@@ -66,6 +66,11 @@ const menus = ref<MenuItem[]>([
         icon: 'Document',
         children: [
           {
+            path: '/papers',
+            title: '试卷列表',
+            icon: 'Document',
+          },
+          {
             path: '/questions',
             title: '题目管理',
             icon: 'Document',

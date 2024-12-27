@@ -24,6 +24,12 @@ const routes = [
         meta: { title: '用户管理' },
       },
       {
+        path: 'papers',
+        name: 'Papers',
+        component: () => import('@/views/PaperPage.vue'),
+        meta: { title: '试卷列表' },
+      },
+      {
         path: 'roles',
         name: 'Roles',
         component: () => import('@/views/RolePage.vue'),
