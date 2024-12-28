@@ -96,6 +96,10 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
+import { RouterLink, RouterView ,useRouter   } from 'vue-router'
+ 
+let router = useRouter ()
+const routes = router.getRoutes();
 
 // 表格相关
 const loading = ref(false)
@@ -181,11 +185,14 @@ const fetchUrls = async () => {
   loading.value = true
   // 模拟 API 调用
   setTimeout(() => {
-    urls.value = [
-      { id: 1, name: 'Google', url: 'https://www.google.com', is_active: true, statusLoading: false },
-      { id: 2, name: 'Bing', url: 'https://www.bing.com', is_active: false, statusLoading: false },
-      { id: 3, name: 'Yahoo', url: 'https://www.yahoo.com', is_active: true, statusLoading: false },
-    ]
+
+    urls.value = routes.map(route => ({
+      id: route.name || route.path,
+      name: route.name || '未命名路由',
+      url: route.path,
+      is_active: true,
+      statusLoading: false
+    }))
     loading.value = false
   }, 500)
 }
