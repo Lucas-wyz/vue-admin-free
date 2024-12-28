@@ -48,6 +48,11 @@ const menus = ref<MenuItem[]>([
         title: '角色管理',
         icon: 'UserFilled',
       },
+      {
+        path: '/urls',
+        title: '路由管理',
+        icon: 'UserFilled',
+      },
     ],
   },
   {

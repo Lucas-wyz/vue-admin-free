@@ -35,6 +35,12 @@ const routes = [
         component: () => import('@/views/RolePage.vue'),
         meta: { title: '角色管理' },
       },
+      {
+        path: 'urls',
+        name: 'Urls',
+        component: () => import('@/views/UrlPage.vue'),
+        meta: { title: 'URL 管理' },
+      },
     ],
   },
   {
