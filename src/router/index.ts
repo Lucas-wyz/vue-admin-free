@@ -44,6 +44,12 @@ const routes = [
     ],
   },
   {
+    path: '/QuestionView',
+    name: 'QuestionView',
+    component: () => import('@/views/QuestionView.vue'),
+    meta: { title: '答题页面' },
+  },
+  {
     path: '/500',
     name: 'Error500',
     component: () => import('@/views/error/500.vue'),
