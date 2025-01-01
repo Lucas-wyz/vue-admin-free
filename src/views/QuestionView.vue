@@ -17,12 +17,19 @@
             <el-tag size="large" type="primary" class="text-xl">
               {{ currentQuestionIndex + 1 }}/{{ questions.length }}
             </el-tag>
+            <el-tag size="small" :type="currentQuestion.type === 'single' ? 'success' : 'warning'">
+              {{ currentQuestion.type === 'single' ? '单选题' : '多选题' }}
+            </el-tag>
             <p class="text-lg font-semibold text-gray-700">{{ currentQuestion.text }}</p>
           </div>
 
           <!-- 选项 -->
           <div class="space-y-3 pl-4">
-            <el-radio-group v-model="currentQuestion.selectedOptions" class="flex flex-col gap-3">
+            <el-radio-group
+              v-if="currentQuestion.type === 'single'"
+              v-model="currentQuestion.selectedOptions[0]"
+              class="flex flex-col gap-3"
+            >
               <el-radio
                 v-for="(option, optIndex) in currentQuestion.options"
                 :key="optIndex"
@@ -33,6 +40,22 @@
                 {{ option }}
               </el-radio>
             </el-radio-group>
+
+            <el-checkbox-group
+              v-else
+              v-model="currentQuestion.selectedOptions"
+              class="flex flex-col gap-3"
+            >
+              <el-checkbox
+                v-for="(option, optIndex) in currentQuestion.options"
+                :key="optIndex"
+                :label="option"
+                border
+                class="w-full !m-0 hover:shadow-md transition-shadow"
+              >
+                {{ option }}
+              </el-checkbox>
+            </el-checkbox-group>
           </div>
 
           <!-- 答案反馈 -->
@@ -90,20 +113,46 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ElCard, ElRadio, ElButton, ElProgress, ElTag, ElResult } from 'element-plus'
+import { ElCard, ElRadio, ElButton, ElProgress, ElTag, ElResult, ElCheckbox } from 'element-plus'
 
-const questions = ref(getRandomQuestions())
+// 定义问题类型
+interface Question {
+  text: string
+  type: 'single' | 'multiple'
+  options: string[]
+  correctAnswers: string[]
+  explanation: string
+  selectedOptions: string[]
+  result: boolean | null
+  score: number
+}
+
+// 题目配置
+const QUIZ_CONFIG = {
+  QUESTIONS_PER_QUIZ: 4, // 每次测试题目数量
+  POINTS_PER_QUESTION: 10, // 每题分数
+  PASS_THRESHOLD: 0.6, // 及格线
+}
+
+// 初始化状态
+const questions = ref<Question[]>(getRandomQuestions())
 const currentQuestionIndex = ref(0)
-const totalScore = ref(0) // 修复 totalScore 初始值为 null 的问题
+const totalScore = ref(0)
 
+// 计算当前问题
 const currentQuestion = computed(() => questions.value[currentQuestionIndex.value])
 
-function getRandomQuestions() {
-  const allQuestions = [
+/**
+ * 从题库中随机获取指定数量的题目
+ * @returns Question[] 随机题目数组
+ */
+function getRandomQuestions(): Question[] {
+  const allQuestions: Question[] = [
     {
       text: '中国的首都是哪里？',
+      type: 'single',
       options: ['北京', '上海', '广州', '深圳'],
       correctAnswers: ['北京'],
       explanation: '中国的首都是北京。',
@@ -112,38 +161,59 @@ function getRandomQuestions() {
       score: 10,
     },
     {
-      text: '2 + 2 等于多少？',
-      options: ['3', '4', '5', '6'],
-      correctAnswers: ['4'],
-      explanation: '2 + 2 等于 4。',
+      text: '以下哪些是中国的一线城市？',
+      type: 'multiple',
+      options: ['北京', '上海', '广州', '深圳', '成都', '武汉'],
+      correctAnswers: ['北京', '上海', '广州', '深圳'],
+      explanation: '北京、上海、广州、深圳被认定为中国的一线城市。',
       selectedOptions: [],
       result: null,
       score: 10,
     },
     {
-      text: '太阳系的中心是什么？',
-      options: ['地球', '月球', '太阳', '火星'],
-      correctAnswers: ['太阳'],
-      explanation: '太阳系的中心是太阳。',
+      text: '以下哪些是编程语言？',
+      type: 'multiple',
+      options: ['Python', 'Word', 'Java', 'Excel', 'JavaScript', 'PowerPoint'],
+      correctAnswers: ['Python', 'Java', 'JavaScript'],
+      explanation: 'Python、Java和JavaScript是编程语言，其他是办公软件。',
       selectedOptions: [],
       result: null,
       score: 10,
     },
     {
-      text: '水的化学式是什么？',
-      options: ['H2O', 'CO2', 'O2', 'H2'],
-      correctAnswers: ['H2O'],
-      explanation: '水的化学式是 H2O。',
+      text: 'HTML的全称是什么？',
+      type: 'single',
+      options: [
+        'Hyper Text Markup Language',
+        'High Tech Modern Language',
+        'Hyper Transfer Markup Language',
+        'Home Tool Markup Language',
+      ],
+      correctAnswers: ['Hyper Text Markup Language'],
+      explanation: 'HTML全称是Hyper Text Markup Language（超文本标记语言）。',
       selectedOptions: [],
       result: null,
       score: 10,
     },
-    // 添加更多中文问题
+    {
+      text: '以下哪些是操作系统？',
+      type: 'multiple',
+      options: ['Windows', 'Office', 'Linux', 'Chrome', 'macOS', 'Firefox'],
+      correctAnswers: ['Windows', 'Linux', 'macOS'],
+      explanation: 'Windows、Linux和macOS是操作系统，Chrome和Firefox是浏览器，Office是办公软件。',
+      selectedOptions: [],
+      result: null,
+      score: 10,
+    },
   ]
-  return allQuestions.sort(() => 0.5 - Math.random()).slice(0, 4)
+  // 随机打乱并截取指定数量的题目
+  return allQuestions.sort(() => 0.5 - Math.random()).slice(0, QUIZ_CONFIG.QUESTIONS_PER_QUIZ)
 }
 
-function submitAnswer() {
+/**
+ * 提交答案并处理结果
+ */
+function submitAnswer(): void {
   const question = currentQuestion.value
   question.result = checkAnswer(question)
   if (question.result) {
@@ -152,30 +222,50 @@ function submitAnswer() {
   currentQuestionIndex.value++
 }
 
-function checkAnswer(question) {
+/**
+ * 检查答案是否正确
+ * @param question 当前题目
+ * @returns boolean 是否答对
+ */
+function checkAnswer(question: Question): boolean {
+  // 检查选择数量和内容是否完全匹配
   return (
     question.selectedOptions.length === question.correctAnswers.length &&
     question.selectedOptions.every((opt) => question.correctAnswers.includes(opt))
   )
 }
 
-function resetQuiz() {
+/**
+ * 重置测试
+ */
+function resetQuiz(): void {
   questions.value = getRandomQuestions()
   currentQuestionIndex.value = 0
   totalScore.value = 0
 }
 
-const format = (percentage) => `进度 ${percentage}%`
+/**
+ * 格式化进度条显示
+ */
+const format = (percentage: number): string => `进度 ${percentage}%`
 
-function getResultMessage(score) {
-  if (score >= questions.value.length * 10) return '太棒了！满分通过！'
-  if (score >= questions.value.length * 7) return '不错的表现！'
-  if (score >= questions.value.length * 6) return '还需要继续努力！'
+/**
+ * 根据分数获取评价信息
+ */
+function getResultMessage(score: number): string {
+  const totalPossibleScore = questions.value.length * QUIZ_CONFIG.POINTS_PER_QUESTION
+  const scorePercentage = score / totalPossibleScore
+
+  if (scorePercentage === 1) return '太棒了！满分通过！'
+  if (scorePercentage >= 0.7) return '不错的表现！'
+  if (scorePercentage >= QUIZ_CONFIG.PASS_THRESHOLD) return '还需要继续努力！'
   return '加油，继续学习！'
 }
 </script>
 
 <style scoped>
+/* 样式分类 */
+/* 动画相关 */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;
@@ -186,16 +276,20 @@ function getResultMessage(score) {
   opacity: 0;
 }
 
-:deep(.el-radio) {
+/* Element Plus 组件样式覆盖 */
+:deep(.el-radio),
+:deep(.el-checkbox) {
   height: auto;
   padding: 12px 20px;
 }
 
-:deep(.el-radio.is-bordered.is-checked) {
+:deep(.el-radio.is-bordered.is-checked),
+:deep(.el-checkbox.is-bordered.is-checked) {
   border-color: rgb(59, 130, 246);
   background-color: rgb(239, 246, 255);
 }
 
+/* 布局相关 */
 .result-panel {
   min-height: 300px;
   display: flex;
