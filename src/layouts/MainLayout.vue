@@ -2,7 +2,7 @@
   <el-container class="main-layout">
     <el-aside width="200px" class="sidebar">
       <el-header class="sidebar-header">
-        <h1>菜单</h1>
+        <h1>{{ title }}</h1>
       </el-header>
       <el-menu router :default-active="currentRoute" :collapse="isCollapse">
         <menu-recursive :menu-items="menus" />
@@ -19,6 +19,8 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import MenuRecursive from '@/components/MenuRecursive.vue'
 import type { MenuItem } from '@/api'
+
+let title = import.meta.env.VITE_MENU_TITLE
 
 const route = useRoute()
 const currentRoute = ref(route.path)
