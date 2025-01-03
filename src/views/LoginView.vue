@@ -1,78 +1,83 @@
 <template>
-  <div
-    class="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-indigo-500"
-  >
-    <el-card
-      class="w-[420px] shadow-2xl hover:shadow-xl transition-shadow duration-300 bg-white/80 backdrop-blur-lg"
-    >
-      <template #header>
-        <div class="text-center p-4">
-          <div class="flex justify-center mb-4">
-            <el-icon class="text-4xl text-primary animate-bounce"><Platform /></el-icon>
-          </div>
-          <h2 class="text-2xl font-bold text-gray-700">系统登录</h2>
-          <p class="text-gray-500 text-sm mt-2">欢迎使用在线测试系统</p>
-        </div>
-      </template>
+  <div class="relative w-full min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <!-- 背景装饰 -->
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-grid-slate-100 opacity-40"></div>
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-white/90"
+      ></div>
+    </div>
 
-      <el-form ref="formRef" :model="loginForm" :rules="rules" class="p-4 space-y-6">
-        <!-- 用户名输入框 -->
-        <el-form-item prop="username">
-          <div class="relative w-full">
-            <el-input
-              v-model="loginForm.username"
-              placeholder="请输入用户名"
-              :prefix-icon="User"
-              class="h-11 w-full"
-              autocomplete="off"
-            >
-              <!-- <template #prefix>
-                <div class="flex items-center h-full text-gray-400">
-                  <el-icon class="text-lg"><User /></el-icon>
+    <!-- 登录布局容器 -->
+    <div class="relative w-full min-h-screen flex items-center justify-end pr-[15%]">
+      <!-- 登录卡片区域 -->
+      <div class="w-[420px] mx-4">
+        <el-card class="backdrop-blur-sm bg-white/90 hover:shadow-xl transition-all duration-500">
+          <template #header>
+            <div class="text-center py-6">
+              <div class="flex justify-center mb-6">
+                <div class="p-4 rounded-full bg-gradient-to-r from-blue-500/10 to-indigo-500/10">
+                  <el-icon
+                    class="text-5xl text-blue-600 transform hover:rotate-180 transition-all duration-500"
+                  >
+                    <Platform />
+                  </el-icon>
                 </div>
-              </template> -->
-            </el-input>
-          </div>
-        </el-form-item>
+              </div>
+              <h2
+                class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+              >
+                SYSTEM
+              </h2>
+            </div>
+          </template>
 
-        <!-- 密码输入框 -->
-        <el-form-item prop="password">
-          <div class="relative w-full">
-            <el-input
-              v-model="loginForm.password"
-              type="password"
-              placeholder="请输入密码"
-              :prefix-icon="Lock"
-              class="h-11 w-full"
-              show-password
-              autocomplete="off"
-            >
-              <!-- <template #prefix>
-                <div class="flex items-center h-full text-gray-400">
-                  <el-icon class="text-lg"><Lock /></el-icon>
-                </div>
-              </template> -->
-            </el-input>
-          </div>
-        </el-form-item>
+          <el-form ref="formRef" :model="loginForm" :rules="rules" class="p-6 space-y-5">
+            <el-form-item prop="username">
+              <el-input
+                v-model="loginForm.username"
+                placeholder="请输入用户名"
+                :prefix-icon="User"
+                class="login-input"
+                autocomplete="off"
+              />
+            </el-form-item>
 
-        <!-- 登录按钮 -->
-        <el-form-item>
-          <el-button
-            type="primary"
-            class="w-full h-11 text-base bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600"
-            :loading="loading"
-            @click="handleLogin"
-          >
-            <template #icon>
-              <el-icon v-if="!loading"><Right /></el-icon>
-              <el-icon v-else class="is-loading"><Loading /></el-icon>
-            </template>
-            {{ loading ? '登录中...' : '登 录' }}
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </el-card>
+            <el-form-item prop="password">
+              <el-input
+                v-model="loginForm.password"
+                type="password"
+                placeholder="请输入密码"
+                :prefix-icon="Lock"
+                class="login-input"
+                show-password
+                autocomplete="off"
+              />
+            </el-form-item>
+
+            <div class="flex items-center justify-between py-2 text-sm">
+              <el-checkbox class="text-gray-600">记住密码</el-checkbox>
+              <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">忘记密码？</a>
+            </div>
+
+            <el-form-item class="mt-4">
+              <el-button
+                type="primary"
+                class="w-full h-11 text-base font-medium login-btn"
+                :loading="loading"
+                @click="handleLogin"
+              >
+                <template #icon>
+                  <el-icon v-if="!loading" class="mr-1"><Right /></el-icon>
+                  <el-icon v-else class="is-loading mr-1"><Loading /></el-icon>
+                </template>
+                {{ loading ? '登录中...' : '登 录' }}
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </el-card>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -134,27 +139,29 @@ async function handleLogin() {
 </script>
 
 <style scoped>
-:deep(.el-input__wrapper) {
-  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05) !important;
-  background-color: #f9fafb;
+.bg-grid-slate-100 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(15 23 42 / 0.04)'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
 }
 
-:deep(.el-input__wrapper.is-focus) {
-  box-shadow: 0 0 0 1px #409eff !important;
-  background-color: white;
+.login-input :deep(.el-input__wrapper) {
+  @apply bg-white/70 border border-gray-200 rounded-lg shadow-sm transition-all duration-300;
+  height: 44px;
 }
 
-:deep(.el-input__wrapper:hover) {
-  background-color: white;
+.login-input :deep(.el-input__wrapper:hover) {
+  @apply border-blue-400 bg-white shadow;
 }
 
-:deep(.el-button--primary) {
-  border: none;
-  font-weight: 500;
+.login-input :deep(.el-input__wrapper.is-focus) {
+  @apply border-blue-500 ring-2 ring-blue-500/20 bg-white;
 }
 
-:deep(.el-card) {
-  border: none;
+.login-btn {
+  @apply !bg-gradient-to-r from-blue-600 to-indigo-600 
+         hover:from-blue-700 hover:to-indigo-700 
+         shadow-md hover:shadow-lg hover:scale-[1.02]
+         border-0 rounded-lg
+         transition-all duration-300 !important;
 }
 
 .is-loading {
