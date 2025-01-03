@@ -44,4 +44,13 @@ export default defineConfig({
       '@api': fileURLToPath(new URL('./src/api', import.meta.url)),
     },
   },
+  server: {
+    port: 5173,
+    strictPort: false,
+    open: true,
+    proxy: { '/api': ' http://localhost:5173/' },
+  },
+  define: {
+    __APP_VERSION__: JSON.stringify('v1.0.0'),
+  },
 })
