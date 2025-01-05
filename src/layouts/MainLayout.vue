@@ -1,16 +1,30 @@
 <template>
   <el-container class="main-layout">
     <el-aside width="200px" class="sidebar">
-      <el-header class="sidebar-header">
+      <el-header class="sidebar-header h-30">
         <h1>{{ title }}</h1>
       </el-header>
       <el-menu router :default-active="currentRoute" :collapse="isCollapse">
         <menu-recursive :menu-items="menus" />
       </el-menu>
     </el-aside>
-    <el-main class="content">
-      <router-view></router-view>
-    </el-main>
+    <el-container>
+      <el-header class="header bg-gray-300">
+        <el-row class="w-full h-full">
+          <el-col :span="22"> </el-col>
+          <el-col :span="2" class="h-full text-[#130606] bg-gray-300">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="h-full">
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              />
+            </svg>
+          </el-col>
+        </el-row>
+      </el-header>
+      <el-main class="content p-5 overflow-y-auto">
+        <router-view></router-view>
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
@@ -25,8 +39,6 @@ let title = import.meta.env.VITE_MENU_TITLE
 const route = useRoute()
 const currentRoute = ref(route.path)
 const isCollapse = ref(false)
-
-// <el-icon>< /></el-icon>
 
 // 模拟菜单数据
 const menus = ref<MenuItem[]>([
@@ -95,18 +107,18 @@ onMounted(() => {
 
 <style scoped>
 .main-layout {
-  height: 100vh;
+  @apply h-screen;
 }
+
 .sidebar {
-  background-color: #f4f4f4;
+  @apply bg-gray-300;
 }
+
 .sidebar-header {
-  padding: 10px;
-  background-color: #ddd;
-  text-align: center;
+  @apply p-2 bg-gray-300 text-center;
 }
+
 .content {
-  padding: 20px;
-  overflow-y: auto;
+  @apply p-5 overflow-y-auto;
 }
 </style>
