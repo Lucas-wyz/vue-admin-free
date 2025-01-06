@@ -48,7 +48,7 @@ export default defineConfig({
     port: 5173,
     strictPort: false,
     open: true,
-    proxy: { '/api': ' http://localhost:5173/' },
+    proxy: { '/api/': ' http://localhost:5173/' },
   },
   define: {
     __APP_VERSION__: JSON.stringify('v1.0.0'),

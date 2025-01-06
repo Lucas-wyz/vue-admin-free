@@ -1,0 +1,62 @@
+{
+  "code": 200,
+  "message": "ok",
+  "data": [
+    {
+      "path": "/",
+      "title": "首页",
+      "icon": "HomeFilled"
+    },
+    {
+      "path": "/system",
+      "title": "系统管理",
+      "icon": "Setting",
+      "children": [
+        {
+          "path": "/users",
+          "title": "用户管理",
+          "icon": "UserFilled"
+        },
+        {
+          "path": "/roles",
+          "title": "角色管理",
+          "icon": "Avatar"
+        },
+        {
+          "path": "/urls",
+          "title": "路由管理",
+          "icon": "Link"
+        }
+      ]
+    },
+    {
+      "path": "/content",
+      "title": "内容管理",
+      "icon": "Notebook",
+      "children": [
+        {
+          "path": "/questions",
+          "title": "题目管理",
+          "icon": "DocumentChecked"
+        },
+        {
+          "path": "/categories",
+          "title": "分类管理",
+          "icon": "Collection",
+          "children": [
+            {
+              "path": "/papers",
+              "title": "试卷列表",
+              "icon": "Files"
+            },
+            {
+              "path": "/questions",
+              "title": "题目管理",
+              "icon": "Document"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

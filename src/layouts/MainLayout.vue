@@ -33,6 +33,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import MenuRecursive from '@/components/MenuRecursive.vue'
 import type { MenuItem } from '@/api'
+import { menuApi } from '@/api'
 
 let title = import.meta.env.VITE_MENU_TITLE
 
@@ -41,66 +42,11 @@ const currentRoute = ref(route.path)
 const isCollapse = ref(false)
 
 // 模拟菜单数据
-const menus = ref<MenuItem[]>([
-  {
-    path: '/',
-    title: '首页',
-    icon: 'Setting',
-  },
-  {
-    path: '/system',
-    title: '系统管理',
-    icon: 'Setting',
-    children: [
-      {
-        path: '/users',
-        title: '用户管理',
-        icon: 'UserFilled',
-      },
-      {
-        path: '/roles',
-        title: '角色管理',
-        icon: 'UserFilled',
-      },
-      {
-        path: '/urls',
-        title: '路由管理',
-        icon: 'UserFilled',
-      },
-    ],
-  },
-  {
-    path: '/content',
-    title: '内容管理',
-    icon: 'Setting',
-    children: [
-      {
-        path: '/questions',
-        title: '题目管理',
-        icon: 'Document',
-      },
-      {
-        path: '/categories',
-        title: '分类管理',
-        icon: 'Document',
-        children: [
-          {
-            path: '/papers',
-            title: '试卷列表',
-            icon: 'Document',
-          },
-          {
-            path: '/questions',
-            title: '题目管理',
-            icon: 'Document',
-          },
-        ],
-      },
-    ],
-  },
-])
+const menus = ref<MenuItem[]>()
 
-onMounted(() => {
+onMounted(async () => {
+  let { data } = await menuApi.getMenuList()
+  menus.value = data
   currentRoute.value = route.path
 })
 </script>
