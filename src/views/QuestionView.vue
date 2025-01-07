@@ -1,20 +1,13 @@
 <template>
   <div class="question-view p-6 max-w-2xl mx-auto">
     <el-card class="box-card hover:shadow-xl transition-shadow duration-300">
-      <!-- 进度条 -->
-      <el-progress
-        :percentage="(currentQuestionIndex / questions.length) * 100"
-        :format="format"
-        class="mb-4"
-      />
-
       <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">在线测试</h1>
 
       <transition name="fade" mode="out-in">
         <div v-if="currentQuestionIndex < questions.length" class="question space-y-6">
           <!-- 问题标题 -->
           <div class="flex items-center gap-4">
-            <el-tag size="large" type="primary" class="text-xl">
+            <el-tag v-if="false" size="large" type="primary" class="text-xl">
               {{ currentQuestionIndex + 1 }}/{{ questions.length }}
             </el-tag>
             <el-tag size="small" :type="currentQuestion.type === 'single' ? 'success' : 'warning'">
@@ -57,27 +50,6 @@
               </el-checkbox>
             </el-checkbox-group>
           </div>
-
-          <!-- 答案反馈 -->
-          <div
-            v-if="currentQuestion.result !== null"
-            class="p-4 rounded-lg"
-            :class="currentQuestion.result ? 'bg-green-50' : 'bg-red-50'"
-          >
-            <p
-              class="font-medium mb-2"
-              :class="{
-                'text-green-600': currentQuestion.result,
-                'text-red-600': !currentQuestion.result,
-              }"
-            >
-              {{ currentQuestion.result ? '✓ 回答正确!' : '✗ 回答错误!' }}
-            </p>
-            <p class="text-gray-600">{{ currentQuestion.explanation }}</p>
-            <p class="mt-2 font-semibold">
-              得分: {{ currentQuestion.result ? currentQuestion.score : 0 }}
-            </p>
-          </div>
         </div>
 
         <!-- 测试结果 -->
@@ -102,20 +74,132 @@
           @click="submitAnswer"
           size="large"
           class="w-40"
+          :loading="submitting"
         >
-          提交答案
+          {{ submitting ? '提交中...' : '提交答案' }}
         </el-button>
         <el-button v-else type="success" @click="resetQuiz" size="large" class="w-40">
           重新测试
         </el-button>
       </div>
     </el-card>
+    <el-dialog v-model="showDialog">
+      <!-- 答案反馈 -->
+      <div
+        v-if="currentQuestion.result !== null"
+        class="p-6 rounded-lg border"
+        :class="[currentQuestion.result ? 'border-green-200' : 'border-red-200']"
+      >
+        <!-- 答题结果头部 -->
+        <div class="flex items-center justify-between mb-4 pb-3 border-b">
+          <div class="flex items-center gap-2">
+            <el-icon :size="24" :class="currentQuestion.result ? 'text-green-500' : 'text-red-500'">
+              <component :is="currentQuestion.result ? 'CircleCheckFilled' : 'CircleCloseFilled'" />
+            </el-icon>
+            <span
+              class="text-lg font-bold"
+              :class="currentQuestion.result ? 'text-green-600' : 'text-red-600'"
+            >
+              {{ currentQuestion.result ? '回答正确' : '回答错误' }}
+            </span>
+          </div>
+          <el-tag :type="currentQuestion.result ? 'success' : 'danger'">
+            得分：{{ currentQuestion.result ? currentQuestion.score : 0 }}
+          </el-tag>
+        </div>
+
+        <!-- 答案详情区域 -->
+        <div class="space-y-4">
+          <!-- 答错时的详细信息 -->
+          <template v-if="!currentQuestion.result">
+            <div class="bg-white/60 rounded-lg p-4 space-y-3">
+              <!-- 您的答案 -->
+              <div class="answer-item">
+                <div class="flex items-center gap-2 mb-1">
+                  <el-icon class="text-red-500"><CloseBold /></el-icon>
+                  <span class="font-medium">您的答案</span>
+                </div>
+                <div class="pl-6">
+                  <el-tag
+                    v-for="option in currentQuestion.selectedOptions"
+                    :key="option"
+                    class="mr-2 mb-2"
+                    type="danger"
+                  >
+                    {{ option }}
+                  </el-tag>
+                </div>
+              </div>
+
+              <!-- 正确答案 -->
+              <div class="answer-item">
+                <div class="flex items-center gap-2 mb-1">
+                  <el-icon class="text-green-500"><Check /></el-icon>
+                  <span class="font-medium">正确答案</span>
+                </div>
+                <div class="pl-6">
+                  <el-tag
+                    v-for="option in currentQuestion.correctAnswers"
+                    :key="option"
+                    class="mr-2 mb-2"
+                    type="success"
+                  >
+                    {{ option }}
+                  </el-tag>
+                </div>
+              </div>
+            </div>
+
+            <!-- 解释说明 -->
+            <div class="bg-white/60 rounded-lg p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <el-icon class="text-blue-500"><InfoFilled /></el-icon>
+                <span class="font-medium">详细解释</span>
+              </div>
+              <div class="pl-6 text-gray-700 leading-relaxed">
+                {{ currentQuestion.explanation }}
+              </div>
+            </div>
+
+            <!-- 提示信息 -->
+            <div class="mt-4 text-gray-500 text-sm flex items-center gap-2">
+              <el-icon><Warning /></el-icon>
+              <span>仔细阅读解释，这将帮助你更好地理解题目。</span>
+            </div>
+          </template>
+
+          <!-- 答对时的反馈 -->
+          <template v-else>
+            <div class="bg-white/60 rounded-lg p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <el-icon class="text-green-500"><InfoFilled /></el-icon>
+                <span class="font-medium">知识要点</span>
+              </div>
+              <div class="pl-6 text-gray-700 leading-relaxed">
+                {{ currentQuestion.explanation }}
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { ElCard, ElRadio, ElButton, ElProgress, ElTag, ElResult, ElCheckbox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import {
+  CircleCheckFilled,
+  CircleCloseFilled,
+  Check,
+  CloseBold,
+  InfoFilled,
+  Warning,
+} from '@element-plus/icons-vue'
+// ...existing code...
+const showDialog = ref(false)
+// ...existing code...
 
 // 定义问题类型
 interface Question {
@@ -140,6 +224,7 @@ const QUIZ_CONFIG = {
 const questions = ref<Question[]>(getRandomQuestions())
 const currentQuestionIndex = ref(0)
 const totalScore = ref(0)
+const submitting = ref(false)
 
 // 计算当前问题
 const currentQuestion = computed(() => questions.value[currentQuestionIndex.value])
@@ -215,11 +300,34 @@ function getRandomQuestions(): Question[] {
  */
 function submitAnswer(): void {
   const question = currentQuestion.value
-  question.result = checkAnswer(question)
-  if (question.result) {
-    totalScore.value += question.score
+
+  // 检查是否已选择答案
+  if (!question.selectedOptions.length) {
+    ElMessage.warning('请选择答案后再提交')
+    return
   }
-  currentQuestionIndex.value++
+
+  submitting.value = true
+  question.result = checkAnswer(question)
+  showDialog.value = currentQuestion.value.result !== null
+  // setTimeout(() => {
+  //   if (question.result) {
+  //     totalScore.value += question.score
+  //     ElMessage({
+  //       message: '答对了！继续保持！',
+  //       type: 'success',
+  //       duration: 2000,
+  //     })
+  //   } else {
+  //     ElMessage({
+  //       message: '答错了，请仔细查看解释',
+  //       type: 'error',
+  //       duration: 2000,
+  //     })
+  //   }
+  //   currentQuestionIndex.value++
+  //   submitting.value = false
+  // }, 5000)
 }
 
 /**
@@ -243,11 +351,6 @@ function resetQuiz(): void {
   currentQuestionIndex.value = 0
   totalScore.value = 0
 }
-
-/**
- * 格式化进度条显示
- */
-const format = (percentage: number): string => `进度 ${percentage}%`
 
 /**
  * 根据分数获取评价信息
