@@ -58,6 +58,8 @@ interface FormData {
   name: string
 }
 
+let router = useRouter()
+
 const formRef = ref<FormInstance>()
 const loading = ref(false)
 
@@ -85,6 +87,7 @@ const handleSubmit = async () => {
         loading.value = false
         // 存储用户信息到 localStorage
         localStorage.setItem('userInfo', JSON.stringify(form.value))
+        router.push({ name: 'QuestionView' })
         resetForm()
       }, 1000)
     }
