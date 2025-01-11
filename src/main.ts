@@ -18,3 +18,7 @@ app.use(router)
 app.use(ElementPlus, { locale: zhCn })
 
 app.mount('#app')
+
+if (import.meta.env.MODE === 'development') {
+  import('eruda').then((eruda) => eruda.default.init())
+}
