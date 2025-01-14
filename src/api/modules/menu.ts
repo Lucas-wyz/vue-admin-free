@@ -1,5 +1,5 @@
 import { request } from '../request'
-import type { MenuItem, MenuResponse } from '@apis'
+import type { MenuItem, MenuResponse } from '@/api'
 import type { ApiPromise } from '../constants/responseCode'
 
 export const menuApi = {
