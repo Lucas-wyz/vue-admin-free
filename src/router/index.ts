@@ -50,7 +50,7 @@ const routes = [
     ],
   },
   {
-    path: 'register',
+    path: '/register',
     name: 'Register',
     component: () => import('@/views/RegisterView.vue'),
     meta: { title: '临时注册' },
