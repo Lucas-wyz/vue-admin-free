@@ -32,7 +32,7 @@
             </div>
           </template>
 
-          <el-form ref="formRef" :model="loginForm" :rules="rules" class="p-6 space-y-5">
+          <el-form :ref="'el-form'" :model="loginForm" :rules="rules" class="p-6 space-y-5">
             <el-form-item prop="username">
               <el-input
                 v-model="loginForm.username"
@@ -82,14 +82,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref, reactive, useTemplateRef } from 'vue'
 import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
+import type { FormInstance } from 'element-plus'
 import { User, Lock, Right, Loading, Platform } from '@element-plus/icons-vue'
 
 const router = useRouter()
 const loading = ref(false)
-const formRef = ref()
+const formRef = useTemplateRef<FormInstance>('el-form')
 
 // 登录表单 - 设置默认值
 const loginForm = reactive({
