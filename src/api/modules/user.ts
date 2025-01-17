@@ -1,8 +1,12 @@
 import { request } from '../request'
-import type { User } from '../types/user'
+import type { User, loginRes, loginUser } from '../types/user'
 import type { ApiPromise } from '../constants/responseCode'
 
 export const userApi = {
+  login(data: loginUser): ApiPromise<loginRes> {
+    return request.post('/login.json', data)
+  },
+
   getUserList(): ApiPromise<User[]> {
     return request.get('/user.json')
   },

@@ -87,13 +87,15 @@ import { useRouter } from 'vue-router'
 import { ElMessage } from 'element-plus'
 import type { FormInstance } from 'element-plus'
 import { User, Lock, Right, Loading, Platform } from '@element-plus/icons-vue'
+import { userApi } from '@/api'
+import type { loginUser } from '@/api'
 
 const router = useRouter()
 const loading = ref(false)
 const formRef = useTemplateRef<FormInstance>('el-form')
 
 // 登录表单 - 设置默认值
-const loginForm = reactive({
+const loginForm = reactive<loginUser>({
   username: 'admin', // 默认用户名
   password: '123456', // 默认密码
 })
@@ -119,9 +121,11 @@ async function handleLogin() {
 
   try {
     // 模拟登录请求
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    // await new Promise((resolve) => setTimeout(resolve, 1000))
+    let { data } = await userApi.login(loginForm)
 
-    if (loginForm.username === MOCK_USER.username && loginForm.password === MOCK_USER.password) {
+    // if (loginForm.username === MOCK_USER.username && loginForm.password === MOCK_USER.password)
+    if (data.authentication) {
       // 存储登录状态
       localStorage.setItem('isLoggedIn', 'true')
       localStorage.setItem('user', JSON.stringify({ username: loginForm.username }))

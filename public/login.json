@@ -1,0 +1,8 @@
+{
+  "code": 200,
+  "message": "ok",
+  "data": {
+    "authentication": true,
+    "token": "this is a token"
+  }
+}

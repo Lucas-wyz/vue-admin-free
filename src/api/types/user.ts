@@ -18,3 +18,22 @@ export interface UserFormData {
   is_active: boolean
   statusLoading: boolean
 }
+
+export interface loginRes {
+  authentication: boolean
+  token: string
+}
+
+export interface loginUser {
+  /**
+   * 默认用户名
+   * @type {string}
+   */
+  username: string
+
+  /**
+   * 默认密码
+   * @type {string}
+   */
+  password: string
+}
