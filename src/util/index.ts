@@ -21,6 +21,7 @@ export const util = {
     return uuid
   },
   async SHA256(text: string): Promise<string> {
+    // 需要https
     const encoder = new TextEncoder()
     const data = encoder.encode(text)
     const hashBuffer = await crypto.subtle.digest('SHA-256', data)
@@ -29,6 +30,7 @@ export const util = {
     return hashHex
   },
   async SHA1(text: string): Promise<string> {
+    // 需要https
     const encoder = new TextEncoder()
     const data = encoder.encode(text)
     const hashBuffer = await crypto.subtle.digest('SHA-1', data)

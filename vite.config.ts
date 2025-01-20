@@ -12,12 +12,15 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
     vueDevTools(),
+    basicSsl(),
     AutoImport({
       resolvers: [
         ElementPlusResolver(),
@@ -48,6 +51,7 @@ export default defineConfig({
     strictPort: false,
     open: true,
     proxy: { '/api/': ' http://localhost:5173/' },
+    https: {},
   },
   define: {
     __APP_VERSION__: JSON.stringify('v1.0.0'),
