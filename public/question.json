@@ -1,0 +1,1206 @@
+{
+  "code": 200,
+  "message": "ok",
+  "data": [
+    {
+      "id": 1,
+      "question_type": "single",
+      "question_title": "JavaScript 中，以下哪个是正确的变量声明方式？",
+      "options": [
+        {
+          "id": 1,
+          "question_id": 1,
+          "option_text": "var myVar;",
+          "option_value": "var",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 2,
+          "question_id": 1,
+          "option_text": "let myVar;",
+          "option_value": "let",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 3,
+          "question_id": 1,
+          "option_text": "const myVar;",
+          "option_value": "const",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 4,
+          "question_id": 1,
+          "option_text": "以上都是",
+          "option_value": "all",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "all",
+      "explanation_text": "在 JavaScript 中，var、let 和 const 都是有效的变量声明方式，但它们有不同的作用域和特性。",
+      "difficulty_level": "easy",
+      "category_id": 1,
+      "category_name": "JavaScript",
+      "tag_ids": [1, 2],
+      "tag_names": ["变量声明", "基础语法"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 2,
+      "question_type": "multiple",
+      "question_title": "以下哪些是 JavaScript 中的基本数据类型？",
+      "options": [
+        {
+          "id": 5,
+          "question_id": 2,
+          "option_text": "String",
+          "option_value": "string",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 6,
+          "question_id": 2,
+          "option_text": "Number",
+          "option_value": "number",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 7,
+          "question_id": 2,
+          "option_text": "Boolean",
+          "option_value": "boolean",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 8,
+          "question_id": 2,
+          "option_text": "Object",
+          "option_value": "object",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["string", "number", "boolean"],
+      "explanation_text": "JavaScript 的基本数据类型包括 String、Number、Boolean、Undefined、Null 和 Symbol。Object 是引用类型。",
+      "difficulty_level": "medium",
+      "category_id": 1,
+      "category_name": "JavaScript",
+      "tag_ids": [3],
+      "tag_names": ["数据类型"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 3,
+      "question_type": "multiple",
+      "question_title": "以下哪些属于 Vue.js 的生命周期钩子？",
+      "options": [
+        {
+          "id": 9,
+          "question_id": 3,
+          "option_text": "created",
+          "option_value": "created",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 10,
+          "question_id": 3,
+          "option_text": "mounted",
+          "option_value": "mounted",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 11,
+          "question_id": 3,
+          "option_text": "updated",
+          "option_value": "updated",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 12,
+          "question_id": 3,
+          "option_text": "deleted",
+          "option_value": "deleted",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["created", "mounted", "updated"],
+      "explanation_text": "created、mounted 和 updated 是 Vue.js 的生命周期钩子，而 deleted 不是。",
+      "difficulty_level": "medium",
+      "category_id": 2,
+      "category_name": "Vue.js",
+      "tag_ids": [4],
+      "tag_names": ["生命周期"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 4,
+      "question_type": "single",
+      "question_title": "Vue 3 中，哪个 API 用于创建响应式数据？",
+      "options": [
+        {
+          "id": 13,
+          "question_id": 4,
+          "option_text": "ref()",
+          "option_value": "ref",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 14,
+          "question_id": 4,
+          "option_text": "watch()",
+          "option_value": "watch",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 15,
+          "question_id": 4,
+          "option_text": "computed()",
+          "option_value": "computed",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 16,
+          "question_id": 4,
+          "option_text": "onMounted()",
+          "option_value": "onMounted",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "ref",
+      "explanation_text": "在 Vue 3 中，ref() 是用于创建响应式数据的主要 API 之一。",
+      "difficulty_level": "easy",
+      "category_id": 2,
+      "category_name": "Vue.js",
+      "tag_ids": [5],
+      "tag_names": ["Composition API"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 5,
+      "question_type": "multiple",
+      "question_title": "以下哪些是有效的 CSS 选择器？",
+      "options": [
+        {
+          "id": 17,
+          "question_id": 5,
+          "option_text": ".class",
+          "option_value": "class",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 18,
+          "question_id": 5,
+          "option_text": "#id",
+          "option_value": "id",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 19,
+          "question_id": 5,
+          "option_text": "@name",
+          "option_value": "name",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 20,
+          "question_id": 5,
+          "option_text": "*",
+          "option_value": "universal",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["class", "id", "universal"],
+      "explanation_text": ".class、#id 和 * 是有效的 CSS 选择器，而 @name 不是有效的选择器语法。",
+      "difficulty_level": "easy",
+      "category_id": 3,
+      "category_name": "CSS",
+      "tag_ids": [6],
+      "tag_names": ["选择器"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 6,
+      "question_type": "multiple",
+      "question_title": "以下哪些是 ES6 的新特性？",
+      "options": [
+        {
+          "id": 21,
+          "question_id": 6,
+          "option_text": "let/const",
+          "option_value": "letconst",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 22,
+          "question_id": 6,
+          "option_text": "箭头函数",
+          "option_value": "arrow",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 23,
+          "question_id": 6,
+          "option_text": "for 循环",
+          "option_value": "for",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 24,
+          "question_id": 6,
+          "option_text": "Promise",
+          "option_value": "promise",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["letconst", "arrow", "promise"],
+      "explanation_text": "let/const、箭头函数和 Promise 是 ES6 的新特性，而 for 循环是 JavaScript 的基础语法。",
+      "difficulty_level": "medium",
+      "category_id": 1,
+      "category_name": "JavaScript",
+      "tag_ids": [7],
+      "tag_names": ["ES6"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 7,
+      "question_type": "single",
+      "question_title": "在 Vue 组件中，哪个生命周期钩子最适合发起异步数据请求？",
+      "options": [
+        {
+          "id": 25,
+          "question_id": 7,
+          "option_text": "created",
+          "option_value": "created",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 26,
+          "question_id": 7,
+          "option_text": "beforeMount",
+          "option_value": "beforeMount",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 27,
+          "question_id": 7,
+          "option_text": "mounted",
+          "option_value": "mounted",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 28,
+          "question_id": 7,
+          "option_text": "beforeCreate",
+          "option_value": "beforeCreate",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "created",
+      "explanation_text": "created 钩子是发起异步请求的最佳时机，因为此时组件实例已经创建完成，可以访问 data 和 methods。",
+      "difficulty_level": "medium",
+      "category_id": 2,
+      "category_name": "Vue.js",
+      "tag_ids": [4, 8],
+      "tag_names": ["生命周期", "最佳实践"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 8,
+      "question_type": "multiple",
+      "question_title": "TypeScript 中哪些是基本类型？",
+      "options": [
+        {
+          "id": 29,
+          "question_id": 8,
+          "option_text": "number",
+          "option_value": "number",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 30,
+          "question_id": 8,
+          "option_text": "string",
+          "option_value": "string",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 31,
+          "question_id": 8,
+          "option_text": "array",
+          "option_value": "array",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 32,
+          "question_id": 8,
+          "option_text": "boolean",
+          "option_value": "boolean",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["number", "string", "boolean"],
+      "explanation_text": "number、string 和 boolean 是 TypeScript 的基本类型，而 array 是复杂类型。",
+      "difficulty_level": "easy",
+      "category_id": 4,
+      "category_name": "TypeScript",
+      "tag_ids": [9],
+      "tag_names": ["类型系统"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 9,
+      "question_type": "single",
+      "question_title": "以下哪个不是 Vuex 的核心概念？",
+      "options": [
+        {
+          "id": 33,
+          "question_id": 9,
+          "option_text": "State",
+          "option_value": "state",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 34,
+          "question_id": 9,
+          "option_text": "Mutations",
+          "option_value": "mutations",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 35,
+          "question_id": 9,
+          "option_text": "Controllers",
+          "option_value": "controllers",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 36,
+          "question_id": 9,
+          "option_text": "Actions",
+          "option_value": "actions",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "controllers",
+      "explanation_text": "Controllers 不是 Vuex 的核心概念。Vuex 的核心概念包括 State、Getters、Mutations、Actions 和 Modules。",
+      "difficulty_level": "medium",
+      "category_id": 2,
+      "category_name": "Vue.js",
+      "tag_ids": [10],
+      "tag_names": ["Vuex"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 10,
+      "question_type": "multiple",
+      "question_title": "以下哪些是前端性能优化的有效方法？",
+      "options": [
+        {
+          "id": 37,
+          "question_id": 10,
+          "option_text": "使用 CDN",
+          "option_value": "cdn",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 38,
+          "question_id": 10,
+          "option_text": "图片懒加载",
+          "option_value": "lazyload",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 39,
+          "question_id": 10,
+          "option_text": "增加代码注释",
+          "option_value": "comment",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 40,
+          "question_id": 10,
+          "option_text": "代码分割",
+          "option_value": "splitting",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["cdn", "lazyload", "splitting"],
+      "explanation_text": "使用 CDN、图片懒加载和代码分割都是有效的性能优化方法，而增加代码注释主要是为了提高代码可维护性。",
+      "difficulty_level": "hard",
+      "category_id": 5,
+      "category_name": "性能优化",
+      "tag_ids": [11],
+      "tag_names": ["前端优化"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 11,
+      "question_type": "multiple",
+      "question_title": "关于 React Hooks 的说法，哪些是正确的？",
+      "options": [
+        {
+          "id": 41,
+          "question_id": 11,
+          "option_text": "只能在函数组件中使用",
+          "option_value": "function_only",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 42,
+          "question_id": 11,
+          "option_text": "可以在条件语句中使用",
+          "option_value": "condition",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 43,
+          "question_id": 11,
+          "option_text": "必须在组件顶层使用",
+          "option_value": "top_level",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 44,
+          "question_id": 11,
+          "option_text": "可以自定义 Hook",
+          "option_value": "custom",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["function_only", "top_level", "custom"],
+      "explanation_text": "React Hooks 只能在函数组件中使用，必须在组件顶层调用，支持自定义 Hook，但不能在条件语句中使用。",
+      "difficulty_level": "medium",
+      "category_id": 6,
+      "category_name": "React",
+      "tag_ids": [12],
+      "tag_names": ["Hooks", "最佳实践"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 12,
+      "question_type": "multiple",
+      "question_title": "在前端安全中，以下哪些是预防 XSS 攻击的有效方法？",
+      "options": [
+        {
+          "id": 45,
+          "question_id": 12,
+          "option_text": "对输入内容进行转义",
+          "option_value": "escape",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 46,
+          "question_id": 12,
+          "option_text": "使用 CSP (Content Security Policy)",
+          "option_value": "csp",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 47,
+          "question_id": 12,
+          "option_text": "设置 HttpOnly Cookie",
+          "option_value": "httponly",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 48,
+          "question_id": 12,
+          "option_text": "使用 eval() 函数",
+          "option_value": "eval",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["escape", "csp", "httponly"],
+      "explanation_text": "转义输入内容、使用 CSP 和设置 HttpOnly Cookie 都是有效的 XSS 防御措施，而使用 eval() 反而会增加安全风险。",
+      "difficulty_level": "hard",
+      "category_id": 7,
+      "category_name": "Web安全",
+      "tag_ids": [13],
+      "tag_names": ["XSS", "安全防护"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 13,
+      "question_type": "single",
+      "question_title": "以下哪个 HTTP 状态码表示服务器临时重定向？",
+      "options": [
+        {
+          "id": 49,
+          "question_id": 13,
+          "option_text": "301 Moved Permanently",
+          "option_value": "301",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 50,
+          "question_id": 13,
+          "option_text": "302 Found",
+          "option_value": "302",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 51,
+          "question_id": 13,
+          "option_text": "404 Not Found",
+          "option_value": "404",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 52,
+          "question_id": 13,
+          "option_text": "500 Internal Server Error",
+          "option_value": "500",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "302",
+      "explanation_text": "302 Found 状态码表示请求的资源临时移动到了新的 URL，与 301 永久重定向不同。",
+      "difficulty_level": "medium",
+      "category_id": 8,
+      "category_name": "网络协议",
+      "tag_ids": [14],
+      "tag_names": ["HTTP", "状态码"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 14,
+      "question_type": "multiple",
+      "question_title": "在 Git 中，以下哪些操作可以撤销已提交的更改？",
+      "options": [
+        {
+          "id": 53,
+          "question_id": 14,
+          "option_text": "git reset --hard HEAD^",
+          "option_value": "reset_hard",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 54,
+          "question_id": 14,
+          "option_text": "git revert HEAD",
+          "option_value": "revert",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 55,
+          "question_id": 14,
+          "option_text": "git checkout .",
+          "option_value": "checkout",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 56,
+          "question_id": 14,
+          "option_text": "git commit --amend",
+          "option_value": "amend",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["reset_hard", "revert", "amend"],
+      "explanation_text": "git reset --hard、git revert 和 git commit --amend 都可以撤销或修改提交，而 git checkout . 只能撤销未暂存的更改。",
+      "difficulty_level": "hard",
+      "category_id": 9,
+      "category_name": "Git",
+      "tag_ids": [15],
+      "tag_names": ["版本控制", "命令"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 15,
+      "question_type": "multiple",
+      "question_title": "关于浏览器存储，以下哪些说法是正确的？",
+      "options": [
+        {
+          "id": 57,
+          "question_id": 15,
+          "option_text": "localStorage 数据永久保存",
+          "option_value": "localStorage",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 58,
+          "question_id": 15,
+          "option_text": "sessionStorage 在页面会话结束后清除",
+          "option_value": "sessionStorage",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 59,
+          "question_id": 15,
+          "option_text": "Cookie 可以设置过期时间",
+          "option_value": "cookie_expire",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 60,
+          "question_id": 15,
+          "option_text": "IndexedDB 只能存储字符串",
+          "option_value": "indexeddb",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["localStorage", "sessionStorage", "cookie_expire"],
+      "explanation_text": "localStorage 数据永久保存直到被清除，sessionStorage 数据在会话结束后清除，Cookie 可以设置过期时间，而 IndexedDB 可以存储多种类型的数据。",
+      "difficulty_level": "medium",
+      "category_id": 10,
+      "category_name": "浏览器",
+      "tag_ids": [16],
+      "tag_names": ["存储", "Web API"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 16,
+      "question_type": "multiple",
+      "question_title": "在 C# 中，以下哪些修饰符用于实现面向对象的封装？",
+      "options": [
+        {
+          "id": 61,
+          "question_id": 16,
+          "option_text": "public",
+          "option_value": "public",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 62,
+          "question_id": 16,
+          "option_text": "private",
+          "option_value": "private",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 63,
+          "question_id": 16,
+          "option_text": "static",
+          "option_value": "static",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 64,
+          "question_id": 16,
+          "option_text": "protected",
+          "option_value": "protected",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["public", "private", "protected"],
+      "explanation_text": "public、private 和 protected 是访问修饰符，用于控制类成员的访问级别，而 static 是用于声明静态成员。",
+      "difficulty_level": "medium",
+      "category_id": 11,
+      "category_name": "C#",
+      "tag_ids": [17],
+      "tag_names": ["面向对象", "封装"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 17,
+      "question_type": "multiple",
+      "question_title": "在 Java 中，以下哪些是线程安全的集合类？",
+      "options": [
+        {
+          "id": 65,
+          "question_id": 17,
+          "option_text": "ArrayList",
+          "option_value": "arraylist",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 66,
+          "question_id": 17,
+          "option_text": "Vector",
+          "option_value": "vector",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 67,
+          "question_id": 17,
+          "option_text": "ConcurrentHashMap",
+          "option_value": "concurrenthashmap",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 68,
+          "question_id": 17,
+          "option_text": "HashMap",
+          "option_value": "hashmap",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["vector", "concurrenthashmap"],
+      "explanation_text": "Vector 和 ConcurrentHashMap 是线程安全的，而 ArrayList 和 HashMap 不是线程安全的。",
+      "difficulty_level": "hard",
+      "category_id": 12,
+      "category_name": "Java",
+      "tag_ids": [18],
+      "tag_names": ["并发编程", "集合类"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 18,
+      "question_type": "single",
+      "question_title": "在 Python 中，以下哪个是正确的列表推导式语法？",
+      "options": [
+        {
+          "id": 69,
+          "question_id": 18,
+          "option_text": "[x for x in range(10)]",
+          "option_value": "correct",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 70,
+          "question_id": 18,
+          "option_text": "[x in range(10)]",
+          "option_value": "wrong1",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 71,
+          "question_id": 18,
+          "option_text": "[for x in range(10)]",
+          "option_value": "wrong2",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 72,
+          "question_id": 18,
+          "option_text": "[x from x in range(10)]",
+          "option_value": "wrong3",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "correct",
+      "explanation_text": "[x for x in range(10)] 是正确的列表推导式语法，它会创建一个包含 0-9 的列表。",
+      "difficulty_level": "medium",
+      "category_id": 13,
+      "category_name": "Python",
+      "tag_ids": [19],
+      "tag_names": ["列表推导式", "语法"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 19,
+      "question_type": "multiple",
+      "question_title": "在 SQL 中，以下哪些是聚合函数？",
+      "options": [
+        {
+          "id": 73,
+          "question_id": 19,
+          "option_text": "COUNT()",
+          "option_value": "count",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 74,
+          "question_id": 19,
+          "option_text": "WHERE",
+          "option_value": "where",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 75,
+          "question_id": 19,
+          "option_text": "AVG()",
+          "option_value": "avg",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 76,
+          "question_id": 19,
+          "option_text": "SUM()",
+          "option_value": "sum",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["count", "avg", "sum"],
+      "explanation_text": "COUNT()、AVG() 和 SUM() 是聚合函数，用于计算统计值，而 WHERE 是条件筛选子句。",
+      "difficulty_level": "easy",
+      "category_id": 14,
+      "category_name": "SQL",
+      "tag_ids": [20],
+      "tag_names": ["聚合函数", "查询"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 20,
+      "question_type": "single",
+      "question_title": "在 React 中，以下哪个钩子用于处理副作用？",
+      "options": [
+        {
+          "id": 77,
+          "question_id": 20,
+          "option_text": "useState",
+          "option_value": "usestate",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 78,
+          "question_id": 20,
+          "option_text": "useEffect",
+          "option_value": "useeffect",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 79,
+          "question_id": 20,
+          "option_text": "useContext",
+          "option_value": "usecontext",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 80,
+          "question_id": 20,
+          "option_text": "useReducer",
+          "option_value": "usereducer",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "useeffect",
+      "explanation_text": "useEffect 钩子用于处理组件中的副作用，如数据获取、订阅或手动更改 DOM 等。",
+      "difficulty_level": "medium",
+      "category_id": 15,
+      "category_name": "React",
+      "tag_ids": [21],
+      "tag_names": ["Hooks", "副作用"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 21,
+      "question_type": "multiple",
+      "question_title": "C# 中，以下哪些是值类型？",
+      "options": [
+        {
+          "id": 81,
+          "question_id": 21,
+          "option_text": "int",
+          "option_value": "int",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 82,
+          "question_id": 21,
+          "option_text": "string",
+          "option_value": "string",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 83,
+          "question_id": 21,
+          "option_text": "struct",
+          "option_value": "struct",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 84,
+          "question_id": 21,
+          "option_text": "class",
+          "option_value": "class",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["int", "struct"],
+      "explanation_text": "在C#中，int和struct是值类型，存储在栈上；而string和class是引用类型，存储在堆上。",
+      "difficulty_level": "medium",
+      "category_id": 11,
+      "category_name": "C#",
+      "tag_ids": [22],
+      "tag_names": ["数据类型", ".NET"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 22,
+      "question_type": "single",
+      "question_title": "在Java中，以下哪个注解用于依赖注入？",
+      "options": [
+        {
+          "id": 85,
+          "question_id": 22,
+          "option_text": "@Autowired",
+          "option_value": "autowired",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 86,
+          "question_id": 22,
+          "option_text": "@Override",
+          "option_value": "override",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 87,
+          "question_id": 22,
+          "option_text": "@Deprecated",
+          "option_value": "deprecated",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 88,
+          "question_id": 22,
+          "option_text": "@SuppressWarnings",
+          "option_value": "suppress",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "autowired",
+      "explanation_text": "@Autowired是Spring框架中用于依赖注入的注解，其他是Java基本注解。",
+      "difficulty_level": "medium",
+      "category_id": 12,
+      "category_name": "Java",
+      "tag_ids": [23],
+      "tag_names": ["Spring", "依赖注入"],
+      "is_active": true,
+      "score_value": 10
+    },
+    {
+      "id": 23,
+      "question_type": "multiple",
+      "question_title": "Python中，以下哪些是装饰器的特性？",
+      "options": [
+        {
+          "id": 89,
+          "question_id": 23,
+          "option_text": "可以修改函数行为",
+          "option_value": "modify",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 90,
+          "question_id": 23,
+          "option_text": "可以带参数",
+          "option_value": "params",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 91,
+          "question_id": 23,
+          "option_text": "只能用于类方法",
+          "option_value": "classonly",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 92,
+          "question_id": 23,
+          "option_text": "可以叠加使用",
+          "option_value": "stack",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["modify", "params", "stack"],
+      "explanation_text": "Python装饰器可以修改函数行为、接受参数、多个装饰器叠加使用，不限于类方法。",
+      "difficulty_level": "hard",
+      "category_id": 13,
+      "category_name": "Python",
+      "tag_ids": [24],
+      "tag_names": ["装饰器", "高级特性"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 24,
+      "question_type": "multiple",
+      "question_title": "以下哪些是有效的SQL索引优化策略？",
+      "options": [
+        {
+          "id": 93,
+          "question_id": 24,
+          "option_text": "为经常查询的列创建索引",
+          "option_value": "query_index",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 94,
+          "question_id": 24,
+          "option_text": "为所有列创建索引",
+          "option_value": "all_index",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 95,
+          "question_id": 24,
+          "option_text": "使用复合索引时遵循最左前缀原则",
+          "option_value": "leftmost",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 96,
+          "question_id": 24,
+          "option_text": "避免在频繁更新的列上创建过多索引",
+          "option_value": "avoid_update",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": ["query_index", "leftmost", "avoid_update"],
+      "explanation_text": "合理的索引优化策略包括：针对查询频繁的列建立索引、遵循最左前缀原则、避免过多索引影响更新性能。为所有列创建索引会降低系统性能。",
+      "difficulty_level": "hard",
+      "category_id": 14,
+      "category_name": "SQL",
+      "tag_ids": [25],
+      "tag_names": ["索引优化", "性能调优"],
+      "is_active": true,
+      "score_value": 15
+    },
+    {
+      "id": 25,
+      "question_type": "single",
+      "question_title": "React中的useMemo和useCallback的主要区别是什么？",
+      "options": [
+        {
+          "id": 97,
+          "question_id": 25,
+          "option_text": "useMemo缓存值，useCallback缓存函数",
+          "option_value": "correct",
+          "sort_order": 1,
+          "is_active": true
+        },
+        {
+          "id": 98,
+          "question_id": 25,
+          "option_text": "useMemo用于状态管理，useCallback用于副作用",
+          "option_value": "wrong1",
+          "sort_order": 2,
+          "is_active": true
+        },
+        {
+          "id": 99,
+          "question_id": 25,
+          "option_text": "useMemo用于组件渲染，useCallback用于事件处理",
+          "option_value": "wrong2",
+          "sort_order": 3,
+          "is_active": true
+        },
+        {
+          "id": 100,
+          "question_id": 25,
+          "option_text": "没有区别，可以互换使用",
+          "option_value": "wrong3",
+          "sort_order": 4,
+          "is_active": true
+        }
+      ],
+      "correct_answer": "correct",
+      "explanation_text": "useMemo用于缓存计算结果（值），而useCallback用于缓存函数定义，两者都是为了优化性能，避免不必要的重新计算或重新创建。",
+      "difficulty_level": "hard",
+      "category_id": 15,
+      "category_name": "React",
+      "tag_ids": [26],
+      "tag_names": ["Hooks", "性能优化"],
+      "is_active": true,
+      "score_value": 15
+    }
+  ]
+}

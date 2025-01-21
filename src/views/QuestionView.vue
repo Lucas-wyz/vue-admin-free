@@ -2,9 +2,9 @@
   <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 px-3 py-4 sm:p-6">
     <div class="max-w-2xl mx-auto">
       <el-card class="!border-none shadow-lg hover:shadow-xl transition-all duration-300">
-        <!-- 标题 -->
+        <!-- 标题样式优化 -->
         <h1
-          class="text-xl sm:text-3xl font-bold mb-4 sm:mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          class="text-lg sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-6 text-center bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight"
         >
           在线测试
         </h1>
@@ -18,47 +18,47 @@
             <div class="flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-2 sm:gap-4">
               <el-tag
                 size="small"
-                :type="currentQuestion.type === 'single' ? 'success' : 'warning'"
+                :type="currentQuestion.question_type === 'single' ? 'success' : 'warning'"
                 class="shrink-0 mt-1 sm:mt-0"
               >
-                {{ currentQuestion.type === 'single' ? '单选题' : '多选题' }}
+                {{ currentQuestion.question_type === 'single' ? '单选题' : '多选题' }}
               </el-tag>
               <p class="text-base sm:text-lg font-medium text-gray-700 leading-relaxed">
-                {{ currentQuestion.text }}
+                {{ currentQuestion.question_title }}
               </p>
             </div>
 
-            <!-- 选项 -->
-            <div class="space-y-2 sm:space-y-3 sm:pl-4">
+            <!-- 选项样式优化 -->
+            <div class="space-y-2 sm:space-y-3">
               <el-radio-group
-                v-if="currentQuestion.type === 'single'"
-                v-model="currentQuestion.selectedOptions[0]"
-                class="flex flex-col gap-3"
+                v-if="currentQuestion.question_type === 'single'"
+                v-model="currentQuestion.selectedAnswer"
+                class="flex flex-col gap-2 sm:gap-3"
               >
                 <el-radio
-                  v-for="(option, optIndex) in currentQuestion.options"
-                  :key="optIndex"
-                  :label="option"
+                  v-for="option in currentQuestion.options"
+                  :key="option.id"
+                  :label="option.option_value"
                   border
-                  class="w-full !m-0 hover:shadow-md transition-shadow"
+                  class="w-full !m-0 !h-auto !py-2.5 sm:!py-3 !px-3 sm:!px-4 text-sm sm:text-base hover:shadow-md transition-shadow"
                 >
-                  {{ option }}
+                  {{ option.option_text }}
                 </el-radio>
               </el-radio-group>
 
               <el-checkbox-group
                 v-else
-                v-model="currentQuestion.selectedOptions"
+                v-model="currentQuestion.selectedAnswer"
                 class="flex flex-col gap-3"
               >
                 <el-checkbox
-                  v-for="(option, optIndex) in currentQuestion.options"
-                  :key="optIndex"
-                  :label="option"
+                  v-for="option in currentQuestion.options"
+                  :key="option.id"
+                  :label="option.option_value"
                   border
                   class="w-full !m-0 hover:shadow-md transition-shadow"
                 >
-                  {{ option }}
+                  {{ option.option_text }}
                 </el-checkbox>
               </el-checkbox-group>
             </div>
@@ -77,16 +77,15 @@
           </div>
         </transition>
 
-        <!-- 按钮区域 -->
-        <div class="flex justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
+        <!-- 按钮区域样式优化 -->
+        <div class="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 mt-4 sm:mt-6">
           <el-button
             v-if="currentQuestionIndex < questions.length"
             type="primary"
-            :disabled="!currentQuestion.selectedOptions.length"
+            :disabled="!currentQuestion.selectedAnswer.length"
             @click="submitAnswer"
             :size="isMobile ? 'default' : 'large'"
-            class="flex-1 sm:flex-none sm:w-40 !bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 transition-all duration-300 disabled:opacity-50"
-            :loading="submitting"
+            class="w-full sm:w-auto !min-w-[120px] !py-2 sm:!py-3"
           >
             {{ submitting ? '提交中...' : '提交答案' }}
           </el-button>
@@ -102,16 +101,20 @@
         </div>
       </el-card>
 
-      <!-- 弹出框 -->
+      <!-- 弹窗样式优化 -->
       <el-dialog
         v-if="showDialog"
         v-model="showDialog"
         :center="true"
         :destroy-on-close="true"
         :close-on-click-modal="true"
-        class="!rounded-xl overflow-hidden"
+        class="!rounded-lg sm:!rounded-xl"
         :fullscreen="isMobile"
-        :class="{ '!m-0': isMobile }"
+        :class="{
+          '!m-0': isMobile,
+          'dialog-mobile': isMobile,
+          'dialog-desktop': !isMobile,
+        }"
         @close="handleNextQuestion"
       >
         <!-- 答案反馈 -->
@@ -165,7 +168,7 @@
                   </div>
                   <div class="pl-6">
                     <el-tag
-                      v-for="option in currentQuestion?.selectedOptions"
+                      v-for="option in currentQuestion?.selectedAnswer"
                       :key="option"
                       class="mr-2 mb-2"
                       type="danger"
@@ -183,7 +186,7 @@
                   </div>
                   <div class="pl-6">
                     <el-tag
-                      v-for="option in currentQuestion?.correctAnswers"
+                      v-for="option in currentQuestion?.correct_answer"
                       :key="option"
                       class="mr-2 mb-2"
                       type="success"
@@ -201,7 +204,7 @@
                   <span class="font-medium">详细解释</span>
                 </div>
                 <div class="pl-6 text-gray-700 leading-relaxed">
-                  {{ currentQuestion?.explanation }}
+                  {{ currentQuestion?.explanation_text }}
                 </div>
               </div>
 
@@ -220,7 +223,7 @@
                   <span class="font-medium">知识要点</span>
                 </div>
                 <div class="pl-6 text-gray-700 leading-relaxed">
-                  {{ currentQuestion?.explanation }}
+                  {{ currentQuestion?.explanation_text }}
                 </div>
               </div>
             </template>
@@ -252,107 +255,69 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ElMessage } from 'element-plus'
+import type { Question } from '@/api/types/question'
+import { questionApi } from '@/api'
 
-// ...existing code...
-const showDialog = ref(false)
-// ...existing code...
-
-// 定义问题类型
-interface Question {
-  text: string
-  type: 'single' | 'multiple'
-  options: string[]
-  correctAnswers: string[]
-  explanation: string
-  selectedOptions: string[]
+// 扩展 Question 类型以适应测试需求
+interface TestQuestion extends Question {
+  selectedAnswer: string | number | (string | number)[]
   result: boolean | null
-  score: number
 }
 
 // 题目配置
 const QUIZ_CONFIG = {
-  QUESTIONS_PER_QUIZ: 4, // 每次测试题目数量
-  POINTS_PER_QUESTION: 10, // 每题分数
-  PASS_THRESHOLD: 0.6, // 及格线
+  QUESTIONS_PER_QUIZ: 10,
+  POINTS_PER_QUESTION: 10,
+  PASS_THRESHOLD: 0.6,
 }
 
-// 初始化状态
-const questions = ref<Question[]>(getRandomQuestions())
+const questions = ref<TestQuestion[]>([])
 const currentQuestionIndex = ref(0)
 const totalScore = ref(0)
 const submitting = ref(false)
+const showDialog = ref(false)
+
+// 获取题目列表并初始化测试题目
+async function initQuestions() {
+  try {
+    const response = await questionApi.getQuestionList()
+    if (response?.data) {
+      // 将获取的题目转换为测试题目格式
+      const testQuestions: TestQuestion[] = response.data.map((question) => ({
+        ...question,
+        selectedAnswer: question.question_type === 'single' ? '' : [],
+        result: null,
+      }))
+      // 随机打乱并截取指定数量的题目
+      questions.value = testQuestions
+        .sort(() => 0.5 - Math.random())
+        .slice(0, QUIZ_CONFIG.QUESTIONS_PER_QUIZ)
+    }
+  } catch (error) {
+    ElMessage.error('获取题目失败：' + error.message)
+    // 使用备用题目
+    questions.value = getRandomQuestions()
+  }
+}
+
+// 在组件挂载时初始化题目
+onMounted(async () => {
+  await initQuestions()
+})
 
 // 计算当前问题
 const currentQuestion = computed(() => questions.value[currentQuestionIndex.value])
 
-// 添加移动端检测
-const isMobile = computed(() => window.innerWidth < 640)
-
 /**
  * 从题库中随机获取指定数量的题目
- * @returns Question[] 随机题目数组
  */
-function getRandomQuestions(): Question[] {
-  const allQuestions: Question[] = [
-    {
-      text: '中国的首都是哪里？',
-      type: 'single',
-      options: ['北京', '上海', '广州', '深圳'],
-      correctAnswers: ['北京'],
-      explanation: '中国的首都是北京。',
-      selectedOptions: [],
-      result: null,
-      score: 10,
-    },
-    {
-      text: '以下哪些是中国的一线城市？',
-      type: 'multiple',
-      options: ['北京', '上海', '广州', '深圳', '成都', '武汉'],
-      correctAnswers: ['北京', '上海', '广州', '深圳'],
-      explanation: '北京、上海、广州、深圳被认定为中国的一线城市。',
-      selectedOptions: [],
-      result: null,
-      score: 10,
-    },
-    {
-      text: '以下哪些是编程语言？',
-      type: 'multiple',
-      options: ['Python', 'Word', 'Java', 'Excel', 'JavaScript', 'PowerPoint'],
-      correctAnswers: ['Python', 'Java', 'JavaScript'],
-      explanation: 'Python、Java和JavaScript是编程语言，其他是办公软件。',
-      selectedOptions: [],
-      result: null,
-      score: 10,
-    },
-    {
-      text: 'HTML的全称是什么？',
-      type: 'single',
-      options: [
-        'Hyper Text Markup Language',
-        'High Tech Modern Language',
-        'Hyper Transfer Markup Language',
-        'Home Tool Markup Language',
-      ],
-      correctAnswers: ['Hyper Text Markup Language'],
-      explanation: 'HTML全称是Hyper Text Markup Language（超文本标记语言）。',
-      selectedOptions: [],
-      result: null,
-      score: 10,
-    },
-    {
-      text: '以下哪些是操作系统？',
-      type: 'multiple',
-      options: ['Windows', 'Office', 'Linux', 'Chrome', 'macOS', 'Firefox'],
-      correctAnswers: ['Windows', 'Linux', 'macOS'],
-      explanation: 'Windows、Linux和macOS是操作系统，Chrome和Firefox是浏览器，Office是办公软件。',
-      selectedOptions: [],
-      result: null,
-      score: 10,
-    },
+function getRandomQuestions(): TestQuestion[] {
+  const allQuestions: TestQuestion[] = [
+    // 可以添加更多题目...
   ]
-  // 随机打乱并截取指定数量的题目
+
   return allQuestions.sort(() => 0.5 - Math.random()).slice(0, QUIZ_CONFIG.QUESTIONS_PER_QUIZ)
 }
 
@@ -362,53 +327,42 @@ function getRandomQuestions(): Question[] {
 function submitAnswer(): void {
   const question = currentQuestion.value
 
-  // 检查是否已选择答案
-  if (!question.selectedOptions.length) {
+  if (!question.selectedAnswer) {
     ElMessage.warning('请选择答案后再提交')
     return
   }
 
   submitting.value = true
   question.result = checkAnswer(question)
-  showDialog.value = currentQuestion.value.result !== null
-  // setTimeout(() => {
-  //   if (question.result) {
-  //     totalScore.value += question.score
-  //     ElMessage({
-  //       message: '答对了！继续保持！',
-  //       type: 'success',
-  //       duration: 2000,
-  //     })
-  //   } else {
-  //     ElMessage({
-  //       message: '答错了，请仔细查看解释',
-  //       type: 'error',
-  //       duration: 2000,
-  //     })
-  //   }
-  //   currentQuestionIndex.value++
-  //   submitting.value = false
-  // }, 5000)
+  showDialog.value = true
 }
 
 /**
  * 检查答案是否正确
- * @param question 当前题目
- * @returns boolean 是否答对
  */
-function checkAnswer(question: Question): boolean {
-  // 检查选择数量和内容是否完全匹配
-  return (
-    question.selectedOptions.length === question.correctAnswers.length &&
-    question.selectedOptions.every((opt) => question.correctAnswers.includes(opt))
-  )
+function checkAnswer(question: TestQuestion): boolean {
+  if (question.question_type === 'single') {
+    return question.selectedAnswer === question.correct_answer
+  } else {
+    const selectedAnswers = Array.isArray(question.selectedAnswer)
+      ? question.selectedAnswer
+      : [question.selectedAnswer]
+    const correctAnswers = Array.isArray(question.correct_answer)
+      ? question.correct_answer
+      : [question.correct_answer]
+
+    return (
+      selectedAnswers.length === correctAnswers.length &&
+      selectedAnswers.every((answer) => correctAnswers.includes(answer))
+    )
+  }
 }
 
 /**
  * 重置测试
  */
-function resetQuiz(): void {
-  questions.value = getRandomQuestions()
+async function resetQuiz(): Promise<void> {
+  await initQuestions()
   currentQuestionIndex.value = 0
   totalScore.value = 0
 }
@@ -431,62 +385,123 @@ const handleNextQuestion = () => {
   showDialog.value = false
   console.log(currentQuestion.value)
   if (currentQuestion.value?.result) {
-    totalScore.value += currentQuestion.value.score
+    totalScore.value += currentQuestion.value.score_value
   }
   showDialog.value = false
   currentQuestionIndex.value++
   submitting.value = false
 }
+
+// 添加移动端检测逻辑
+const isMobile = computed(() => window.innerWidth < 640)
+
+// 添加窗口大小变化监听
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
+
+function handleResize() {
+  // 可以添加其他响应式处理逻辑
+}
 </script>
 
 <style scoped>
-/* 使用 Tailwind 处理大部分样式 */
+/* 基础组件样式 */
 :deep(.el-radio),
 :deep(.el-checkbox) {
-  @apply h-auto px-4 sm:px-5 py-2.5 sm:py-3 mb-0 rounded-lg transition-all duration-200 hover:shadow-md text-sm sm:text-base;
+  @apply h-auto px-3 sm:px-4 py-2.5 sm:py-3 mb-0 rounded-lg;
+  @apply transition-all duration-200 hover:bg-gray-50;
+  @apply border-gray-200 hover:border-blue-400;
 }
 
 :deep(.el-radio.is-bordered.is-checked),
 :deep(.el-checkbox.is-bordered.is-checked) {
-  @apply border-blue-500 bg-blue-50;
+  @apply border-blue-500 bg-blue-50/50 shadow-sm;
 }
 
-/* 动画效果 */
-.fade-enter-active,
-.fade-leave-active {
-  @apply transition-all duration-300 ease-out;
+/* 按钮和标签样式 */
+:deep(.el-button) {
+  @apply rounded-lg font-medium transition-all duration-300;
+  @apply hover:shadow-md active:shadow-sm disabled:opacity-50;
 }
 
-.fade-enter-from,
-.fade-leave-to {
-  @apply opacity-0 transform translate-y-2;
+:deep(.el-button--primary) {
+  @apply bg-gradient-to-r from-blue-500 to-indigo-500;
+  @apply hover:from-blue-600 hover:to-indigo-600;
 }
 
-/* 移动端弹窗优化 */
-@media (max-width: 640px) {
+:deep(.el-tag) {
+  @apply rounded-full font-medium text-xs sm:text-sm;
+  @apply transform transition-all duration-200;
+}
+
+/* 容器样式 */
+.question-container {
+  @apply space-y-4 sm:space-y-6 animate-fadeIn;
+}
+
+/* 弹窗样式 */
+.dialog-mobile {
+  :deep(.el-dialog__header) {
+    @apply p-3 border-b border-gray-100;
+  }
+
   :deep(.el-dialog__body) {
     @apply p-3 max-h-[calc(100vh-120px)] overflow-y-auto;
   }
 
+  :deep(.el-dialog__footer) {
+    @apply p-3 border-t border-gray-100;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* 暗色主题 */
+@media (prefers-color-scheme: dark) {
+  :deep(.el-radio),
+  :deep(.el-checkbox) {
+    @apply hover:bg-gray-800 text-gray-200 border-gray-700;
+  }
+
   :deep(.el-tag) {
-    @apply text-xs leading-normal;
+    @apply bg-opacity-20;
   }
 
-  :deep(.quiz-dialog .el-dialog__footer) {
-    @apply p-3 border-t border-gray-200;
+  .question-card {
+    @apply bg-gray-800/90 border-gray-700/50;
   }
 }
 
-/* 滚动条美化 */
-:deep(.el-dialog__body)::-webkit-scrollbar {
-  @apply w-1.5;
+/* 响应式适配 */
+@screen sm {
+  .mobile-container {
+    @apply max-w-lg mx-auto;
+  }
 }
 
-:deep(.el-dialog__body)::-webkit-scrollbar-thumb {
-  @apply bg-gray-300 rounded-full;
-}
-
-:deep(.el-dialog__body)::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+/* 无障碍支持 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    @apply transition-none transform-none animate-none;
+  }
 }
 </style>
