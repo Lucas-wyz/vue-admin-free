@@ -50,8 +50,8 @@
               "icon": "Files"
             },
             {
-              "path": "/questions",
-              "title": "题目管理",
+              "path": "/AnonymousUser",
+              "title": "匿名用户管理",
               "icon": "Document"
             }
           ]

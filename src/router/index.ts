@@ -42,6 +42,12 @@ const routes = [
         meta: { title: '角色管理' },
       },
       {
+        path: '/AnonymousUser',
+        name: 'AnonymousUser',
+        component: () => import('@/views/AnonymousUserPage.vue'),
+        meta: { title: '匿名管理' },
+      },
+      {
         path: 'urls',
         name: 'Urls',
         component: () => import('@/views/UrlPage.vue'),
