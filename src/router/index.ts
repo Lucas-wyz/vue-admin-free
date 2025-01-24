@@ -61,6 +61,13 @@ const routes = [
     component: () => import('@/views/RegisterView.vue'),
     meta: { title: '临时注册' },
   },
+
+  {
+    path: '/RegisterInfoView',
+    name: 'RegisterInfoView',
+    component: () => import('@/views/RegisterInfoView.vue'),
+    meta: { title: '用户注册' },
+  },
   {
     path: '/QuestionView',
     name: 'QuestionView',
