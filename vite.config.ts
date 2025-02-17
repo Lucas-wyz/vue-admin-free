@@ -50,7 +50,15 @@ export default defineConfig({
     port: 5173,
     strictPort: false,
     open: true,
-    proxy: { '/api/': ' http://localhost:5173/' },
+    proxy: {
+      // https://github.com/http-party/node-http-proxy#options
+      '/api/': {
+        target: 'https://localhost:7230',
+        secure: false,
+        prependPath: true,
+        changeOrigin: true,
+      },
+    },
     https: {},
   },
   define: {
