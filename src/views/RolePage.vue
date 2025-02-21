@@ -187,13 +187,8 @@ const roles = ref<Role[]>([])
 const fetchRoles = async () => {
   try {
     loading.value = true
-    const response: Role[] = [
-      { id: 1, name: '管理员', description: '系统管理员', is_active: true, statusLoading: false },
-      { id: 2, name: '用户', description: '普通用户', is_active: false, statusLoading: false },
-      { id: 3, name: '访客', description: '访客用户', is_active: true, statusLoading: false },
-    ]
-
-    roles.value = response
+    let response = await roleApi.getRoleList()
+    roles.value = response.data
   } catch (error) {
     ElMessage.error('获取角色列表失败：' + error.message)
   } finally {

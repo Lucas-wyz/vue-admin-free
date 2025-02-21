@@ -1,0 +1,27 @@
+{
+  "code": 200,
+  "message": "ok",
+  "data": [
+    {
+      "id": 1,
+      "name": "管理员",
+      "description": "系统管理员",
+      "is_active": true,
+      "statusLoading": false
+    },
+    {
+      "id": 2,
+      "name": "用户",
+      "description": "普通用户",
+      "is_active": false,
+      "statusLoading": false
+    },
+    {
+      "id": 3,
+      "name": "访客",
+      "description": "访客用户",
+      "is_active": true,
+      "statusLoading": false
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import type { ApiPromise } from '../constants/responseCode'
 
 export const roleApi = {
   getRoleList(): ApiPromise<Role[]> {
-    return request.get('/roles')
+    return request.get('/roles.json')
   },
 
   getRole(id: number): ApiPromise<Role> {
