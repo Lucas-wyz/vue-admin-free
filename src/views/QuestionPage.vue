@@ -144,6 +144,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { Question, Option } from '@/api'
+import { questionApi } from '@/api'
 
 // 定义新的类型接口
 
@@ -257,6 +258,11 @@ questions1.value = [
     score_value: 3,
   },
 ]
+
+onMounted(async () => {
+  const response = await questionApi.getQuestionList()
+  questions1.value = response.data
+})
 
 const editDialogVisible = ref(false)
 const currentQuestion = ref<Question | null>(null)
