@@ -14,13 +14,6 @@ const total = ref(0)
 const selectedRows = ref<User[]>([])
 
 // 过滤后的用户列表
-const filteredUsers = computed(() => {
-  return users.value.filter(
-    (user) =>
-      user.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchQuery.value.toLowerCase()),
-  )
-})
 
 // 处理搜索
 const handleSearch = () => {
@@ -99,6 +92,7 @@ const formRef = ref<FormInstance>()
 const submitting = ref(false)
 
 const formData = reactive<UserFormData>({
+  id: 0,
   name: '',
   email: '',
   phone: '',
@@ -135,6 +129,7 @@ const handleCreate = () => {
 const handleEdit = (user: User) => {
   formMode.value = 'edit'
   Object.assign(formData, {
+    id: user.id,
     name: user.name,
     email: user.email,
     phone: user.phone,
@@ -167,12 +162,10 @@ const handleSubmit = async () => {
       submitting.value = true
       try {
         if (formMode.value === 'create') {
-          await userApi.createUser(formData)
+          let { id, ...datas } = formData
+          await userApi.createUser(datas)
         } else {
-          const currentUser = users.value.find((u) => u.name === formData.name)
-          if (currentUser) {
-            await userApi.updateUser(currentUser.id, formData)
-          }
+          await userApi.updateUser(formData.id, formData)
         }
         ElMessage.success(`${formMode.value === 'create' ? '创建' : '更新'}成功`)
         dialogVisible.value = false

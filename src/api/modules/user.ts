@@ -8,7 +8,7 @@ export const userApi = {
   },
 
   getUserList(): ApiPromise<User[]> {
-    return request.get('/user.json')
+    return request.get('/api/Users')
   },
 
   getUser(id: number): ApiPromise<User> {
@@ -16,14 +16,14 @@ export const userApi = {
   },
 
   createUser(user: Omit<User, 'id'>): ApiPromise<User> {
-    return request.post('/user', user)
+    return request.post('/api/Users', user)
   },
 
   updateUser(id: number, user: Partial<User>): ApiPromise<User> {
-    return request.put(`/user/${id}`, user)
+    return request.put(`/api/Users/${id}`, user)
   },
 
   deleteUser(id: number): ApiPromise<void> {
-    return request.delete(`/user/${id}`)
+    return request.delete(`/api/Users/${id}`)
   },
 }

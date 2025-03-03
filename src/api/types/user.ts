@@ -11,6 +11,7 @@ export interface UserListResponse {
 }
 
 export interface UserFormData {
+  id: number
   name: string
   email: string
   phone: string
