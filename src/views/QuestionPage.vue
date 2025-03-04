@@ -9,6 +9,7 @@
             v-for="(option, idx) in question.options"
             :key="idx"
             :label="option.option_value"
+            :value="option.option_value"
           >
             {{ option.option_text }}
           </el-radio>
@@ -20,6 +21,7 @@
             v-for="(option, idx) in question.options"
             :key="idx"
             :label="option.option_value"
+            :value="option.option_value"
           >
             {{ option.option_text }}
           </el-checkbox>
