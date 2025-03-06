@@ -1,6 +1,7 @@
 <template>
   <div class="question-page">
     <h1>题目页面</h1>
+    <el-button @click="addQuestion" type="primary" style="margin-bottom: 20px">添加题目</el-button>
     <el-card class="question-card" v-for="(question, index) in questions1" :key="question.id">
       <h2>{{ question.question_title }}</h2>
       <template v-if="question.question_type === 'single'">
@@ -114,7 +115,7 @@
     </el-dialog>
 
     <!-- 添加查看详情对话框 -->
-    <el-dialog :visible.sync="detailsDialogVisible" title="题目详情">
+    <!-- <el-dialog v-model="detailsDialogVisible" title="题目详情">
       <div v-if="currentQuestion" class="question-details">
         <h3>题目标题</h3>
         <p>{{ currentQuestion.question_title }}</p>
@@ -138,7 +139,7 @@
       <div slot="footer" class="dialog-footer">
         <el-button @click="detailsDialogVisible = false">关闭</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 
@@ -298,7 +299,16 @@ const saveEdit = async () => {
     submitLoading.value = true
     // 这里可以添加调用更新API的代码
     // await questionApi.updateQuestion(currentQuestion.value)
+    // questions1.value[currentIndex.value] = { ...currentQuestion.value }
+    if (!currentQuestion.value?.id) {
+      questions1.value.push({ ...currentQuestion.value })
+    } else {
+      if (!currentQuestion.value || currentIndex.value === null) return
+
+      console.log({ a: '修改', a1: currentQuestion.value })
     questions1.value[currentIndex.value] = { ...currentQuestion.value }
+    }
+
     ElMessage.success('保存成功')
     handleDialogClose()
   } catch (error) {
@@ -367,6 +377,14 @@ const removeOption = (index: number) => {
     return
   }
   currentQuestion.value.options.splice(index, 1)
+}
+
+// 添加题目
+const addQuestion = () => {
+  editDialogVisible.value = true
+  currentQuestion.value = {
+    options: [],
+  }
 }
 
 // 对话框关闭处理
