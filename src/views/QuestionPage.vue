@@ -278,8 +278,6 @@ const editQuestion = (index: number) => {
 }
 
 const saveEdit = async () => {
-  if (!currentQuestion.value || currentIndex.value === null) return
-
   if (!currentQuestion.value.question_title.trim()) {
     ElMessage.warning('请填写题目标题')
     return
@@ -301,7 +299,10 @@ const saveEdit = async () => {
     // await questionApi.updateQuestion(currentQuestion.value)
     // questions1.value[currentIndex.value] = { ...currentQuestion.value }
     if (!currentQuestion.value?.id) {
+      let question = currentQuestion.value as Question
+      const { id, ...data } = question
       questions1.value.push({ ...currentQuestion.value })
+      questionApi.createUser(data)
     } else {
       if (!currentQuestion.value || currentIndex.value === null) return
 
