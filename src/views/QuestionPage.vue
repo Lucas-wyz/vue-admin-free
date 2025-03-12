@@ -328,8 +328,8 @@ const deleteQuestion = async (index: number) => {
     })
     loading.value = true
     // 这里可以添加调用删除API的代码
-    // await questionApi.deleteQuestion(questions1.value[index].id)
-    questions1.value.splice(index, 1)
+    await questionApi.deleteQuestion(String(questions1.value[index].id))
+    // questions1.value.splice(index, 1)
     ElMessage.success('删除成功')
   } catch (error) {
     if (error !== 'cancel') {

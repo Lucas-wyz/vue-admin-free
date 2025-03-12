@@ -9,4 +9,7 @@ export const questionApi = {
   createUser(user: Omit<Question, 'id'>): ApiPromise<Question> {
     return request.post('/api/Questions', user)
   },
+  deleteQuestion(id: string): ApiPromise<Question> {
+    return request.delete(`/api/Questions/${id}`)
+  },
 }
