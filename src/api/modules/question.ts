@@ -12,4 +12,7 @@ export const questionApi = {
   deleteQuestion(id: string): ApiPromise<Question> {
     return request.delete(`/api/Questions/${id}`)
   },
+  updateUser(id: string, user: Partial<Question>): ApiPromise<Question> {
+    return request.put(`/api/Questions/${id}`, user)
+  },
 }

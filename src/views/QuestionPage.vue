@@ -308,6 +308,9 @@ const saveEdit = async () => {
 
       console.log({ a: '修改', a1: currentQuestion.value })
     questions1.value[currentIndex.value] = { ...currentQuestion.value }
+
+      let val = currentQuestion.value
+      questionApi.updateUser(String(val.id), val).then((x) => console.log({ ...x }))
     }
 
     ElMessage.success('保存成功')
