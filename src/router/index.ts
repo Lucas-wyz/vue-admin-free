@@ -48,6 +48,12 @@ const routes = [
         meta: { title: '匿名管理' },
       },
       {
+        path: '/QuestionHistoryPage',
+        name: 'QuestionHistoryPage',
+        component: () => import('@/views/QuestionHistoryPage.vue'),
+        meta: { title: '答题历史页面' },
+      },
+      {
         path: 'urls',
         name: 'Urls',
         component: () => import('@/views/UrlPage.vue'),

@@ -40,6 +40,11 @@
           "icon": "DocumentChecked"
         },
         {
+          "path": "/QuestionHistoryPage",
+          "title": "题目历史管理",
+          "icon": "DocumentChecked"
+        },
+        {
           "path": "/categories",
           "title": "分类管理",
           "icon": "Collection",
