@@ -1,6 +1,7 @@
 export interface Option {
   id: number
   question_id: number
+  correct: boolean
   option_text: string
   option_value: string | number
   sort_order: number

@@ -73,6 +73,7 @@
         <el-form-item label="选项">
           <div v-for="(option, index) in currentQuestion.options" :key="index" class="option-item">
             <el-input v-model="option.option_text" placeholder="选项内容" style="width: 60%" />
+            <el-switch v-model="option.correct" style="width: 20%" />
             <el-input
               v-model="option.option_value"
               placeholder="选项值"
@@ -82,7 +83,7 @@
           </div>
           <el-button type="primary" @click="addOption">添加选项</el-button>
         </el-form-item>
-        <el-form-item label="正确答案">
+        <!-- <el-form-item label="正确答案">
           <template v-if="currentQuestion.question_type === 'single'">
             <el-select v-model="currentQuestion.correct_answer">
               <el-option
@@ -103,7 +104,7 @@
               />
             </el-select>
           </template>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="解释说明">
           <el-input v-model="currentQuestion.explanation_text" type="textarea" :rows="3" />
         </el-form-item>
