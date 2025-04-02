@@ -15,4 +15,12 @@ export const questionApi = {
   updateUser(id: string, user: Partial<Question>): ApiPromise<Question> {
     return request.put(`/api/Questions/${id}`, user)
   },
+
+  getRandom(): ApiPromise<Question> {
+    return request.get(`/api/Questions/GetRandom`)
+  },
+
+  verify(id: string, user: Partial<Question>): ApiPromise<Question> {
+    return request.post(`/api/Questions/verify/${id}`, user)
+  },
 }
