@@ -1,0 +1,28 @@
+{
+  "code": 200,
+  "message": "ok",
+  "data": [
+    {
+      "id": "3",
+      "user_name": "张三",
+      "question_title": "JavaScript 中，以下哪个是正确的变量声明方式？",
+      "answer": "4",
+      "correct_answer": "4",
+      "is_correct": true,
+      "score": 2,
+      "submit_time": "2024-01-20 14:30:00",
+      "time_spent": "120s"
+    },
+    {
+      "id": "2",
+      "user_name": "张三",
+      "question_title": "JavaScript 中，以下哪个是正确的变量声明方式？",
+      "answer": "4",
+      "correct_answer": "4",
+      "is_correct": true,
+      "score": 2,
+      "submit_time": "2024-01-20 14:30:00",
+      "time_spent": "120s"
+    }
+  ]
+}

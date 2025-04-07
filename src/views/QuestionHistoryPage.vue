@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { questionHistoryApi } from '@/api'
+import type { questionHistory } from '@/api'
 
 // 表格相关
 const loading = ref(false)
@@ -10,9 +12,9 @@ const pageSize = ref(10)
 const total = ref(0)
 
 // 历史记录数据
-const historyRecords = ref([
+const historyRecords = ref<questionHistory[]>([
   {
-    id: 1,
+    id: '1',
     user_name: '张三',
     question_title: 'JavaScript 中，以下哪个是正确的变量声明方式？',
     answer: '4',
@@ -34,8 +36,8 @@ const handleSearch = () => {
 // 获取历史记录
 const fetchHistory = async () => {
   try {
-    loading.value = true
-    // const response = await api.getQuestionHistory({
+    let { data } = await questionHistoryApi.getHistoryList()
+    historyRecords.value.push(...data)
     //   page: currentPage.value,
     //   pageSize: pageSize.value,
     //   query: searchQuery.value

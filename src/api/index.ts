@@ -8,3 +8,6 @@ export type { RoleFormData, Role } from './types/role'
 export { roleApi } from './modules/role'
 export { menuApi } from './modules/menu'
 export { questionApi } from './modules/question'
+
+export { questionHistoryApi } from './modules/history'
+export type { questionHistory } from './types/questionHistory'
