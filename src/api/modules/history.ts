@@ -4,6 +4,6 @@ import type { ApiPromise } from '../constants/responseCode'
 
 export const questionHistoryApi = {
   getHistoryList(): ApiPromise<questionHistory[]> {
-    return request.get('/apis/history.json')
+    return request.get('/api/QuestionHistory')
   },
 }
