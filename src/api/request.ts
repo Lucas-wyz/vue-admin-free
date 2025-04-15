@@ -18,7 +18,7 @@ request.interceptors.request.use(
   function (config) {
     // Do something before request is sent
 
-    let toke = 'token'
+    let toke = localStorage.getItem('token')
     config.headers['Authorization'] = `Bearer ${toke}`
 
     return config

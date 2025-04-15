@@ -131,6 +131,7 @@ async function handleLogin() {
       localStorage.setItem('user', JSON.stringify({ username: loginForm.username }))
 
       ElMessage.success('登录成功')
+      localStorage.setItem('token', data.token) // 存储 token
       router.push('/')
     } else {
       ElMessage.error('用户名或密码错误')
