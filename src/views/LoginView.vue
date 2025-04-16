@@ -122,7 +122,7 @@ async function handleLogin() {
   try {
     // 模拟登录请求
     // await new Promise((resolve) => setTimeout(resolve, 1000))
-    let { data } = await userApi.login(loginForm)
+    let { data } = await userApi.loginJwtTest(loginForm)
 
     // if (loginForm.username === MOCK_USER.username && loginForm.password === MOCK_USER.password)
     if (data.authentication) {
