@@ -182,6 +182,9 @@ const handleSubmit = async () => {
 onMounted(() => {
   fetchUsers()
 })
+
+// 编辑账户密码
+const dialogVisiblePassword = ref(false)
 </script>
 
 <template>
@@ -205,7 +208,7 @@ onMounted(() => {
     </div>
     <el-table
       v-loading="loading"
-      :data="filteredUsers"
+      :data="users"
       style="width: 100%"
       @selection-change="handleSelectionChange"
     >
@@ -231,6 +234,9 @@ onMounted(() => {
           </el-button>
           <el-button type="danger" link @click="handleDelete(row)">
             <el-icon><i-ep-delete /></el-icon>删除
+          </el-button>
+          <el-button type="danger" link @click=" () => { dialogVisiblePassword = !dialogVisiblePassword }"          >
+            <el-icon><i-ep-delete /></el-icon>重置密码
           </el-button>
         </template>
       </el-table-column>
@@ -281,6 +287,22 @@ onMounted(() => {
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="handleSubmit" :loading="submitting"> 确定 </el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 用户表账号密码 -->
+    <el-dialog v-model="dialogVisiblePassword" :title="'编辑密码'" width="500px" destroy-on-close>
+      <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
+        <el-form-item label="账号">
+          <el-input />
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="dialogVisiblePassword = false">取消</el-button>
+        <el-button type="primary" :loading="submitting"> 确定 </el-button>
       </template>
     </el-dialog>
   </div>
