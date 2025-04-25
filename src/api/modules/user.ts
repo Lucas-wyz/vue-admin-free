@@ -1,5 +1,5 @@
 import { request } from '../request'
-import type { User, loginRes, loginUser } from '../types/user'
+import type { User, loginRes, loginUser, Accounts } from '../types/user'
 import type { ApiPromise } from '../constants/responseCode'
 
 export const userApi = {
@@ -29,5 +29,13 @@ export const userApi = {
 
   deleteUser(id: number): ApiPromise<void> {
     return request.delete(`/api/Users/${id}`)
+  },
+
+  getEdit(id: string): ApiPromise<Accounts> {
+    return request.get(`/api/Users/EditPassword/${id}`)
+  },
+
+  postEdit(id: string, accounts: Accounts): ApiPromise<Accounts> {
+    return request.post(`/api/Users/EditPassword/${id}`, accounts)
   },
 }

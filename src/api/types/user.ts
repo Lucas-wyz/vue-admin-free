@@ -38,3 +38,12 @@ export interface loginUser {
    */
   password: string
 }
+
+export interface Accounts {
+  id: number | null
+
+  uid: string | null
+  Name: string | null
+  account: string | null
+  password: string | null
+}
