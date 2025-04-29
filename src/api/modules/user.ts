@@ -10,6 +10,9 @@ export const userApi = {
   loginJwtTest(data: loginUser): ApiPromise<loginRes> {
     return request.post('/api/login/JwtTest', data)
   },
+  loginJwt(data: loginUser): ApiPromise<loginRes> {
+    return request.post('/api/login/Jwt', data)
+  },
 
   getUserList(): ApiPromise<User[]> {
     return request.get('/api/Users')

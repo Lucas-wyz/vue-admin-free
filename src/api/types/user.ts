@@ -37,6 +37,8 @@ export interface loginUser {
    * @type {string}
    */
   password: string
+
+  account: string | null
 }
 
 export interface Accounts {
