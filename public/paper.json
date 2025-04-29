@@ -1,0 +1,56 @@
+{
+  "code": 200,
+  "message": "success",
+  "data": [
+    {
+      "id": 1,
+      "title": "前端开发基础测试",
+      "description": "测试前端基础知识掌握程度",
+      "duration_minutes": 60,
+      "total_score": 100,
+      "pass_score": 60,
+      "questions": [
+        {
+          "question_id": 1,
+          "score": 20,
+          "sort_order": 1
+        },
+        {
+          "question_id": 2,
+          "score": 20,
+          "sort_order": 2
+        }
+      ],
+      "category_id": 1,
+      "category_name": "前端开发",
+      "is_active": true,
+      "created_at": "2024-01-23T10:00:00Z",
+      "updated_at": "2024-01-23T10:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Vue.js进阶测试",
+      "description": "测试Vue.js相关知识掌握程度",
+      "duration_minutes": 90,
+      "total_score": 100,
+      "pass_score": 70,
+      "questions": [
+        {
+          "question_id": 3,
+          "score": 25,
+          "sort_order": 1
+        },
+        {
+          "question_id": 4,
+          "score": 25,
+          "sort_order": 2
+        }
+      ],
+      "category_id": 1,
+      "category_name": "前端开发",
+      "is_active": true,
+      "created_at": "2024-01-23T10:00:00Z",
+      "updated_at": "2024-01-23T10:00:00Z"
+    }
+  ]
+}

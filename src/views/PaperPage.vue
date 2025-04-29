@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { request } from '@/api/request'
+import { paperApi } from '@/api'
 import { useRouter } from 'vue-router'
+import type { Paper } from '@/api'
 
-interface Paper {
-  id: number
-  title: string
-  description: string
-  totalScore: number
-  passScore: number
-  createTime: string
-}
+// interface Paper {
+//   id: number
+//   title: string
+//   description: string
+//   totalScore: number
+//   passScore: number
+//   createTime: string
+// }
 
 interface Question {
   id: number
@@ -63,25 +64,28 @@ const viewPaperDetails = async (paperId: number) => {
 }
 
 onMounted(async () => {
+  let { data } = await paperApi.getPaperList()
+  console.log(data)
+  papers.value = data
   // 模拟数据，实际项目中应该通过 API 获取
-  papers.value = [
-    {
-      id: 1,
-      title: '前端基础测试',
-      description: '测试前端基础知识',
-      totalScore: 100,
-      passScore: 60,
-      createTime: '2024-01-20 14:30:00',
-    },
-    {
-      id: 2,
-      title: 'Vue.js进阶测试',
-      description: '测试Vue.js进阶知识',
-      totalScore: 100,
-      passScore: 70,
-      createTime: '2024-01-21 15:45:00',
-    },
-  ]
+  // papers.value = [
+  //   {
+  //     id: 1,
+  //     title: '前端基础测试',
+  //     description: '测试前端基础知识',
+  //     totalScore: 100,
+  //     passScore: 60,
+  //     createTime: '2024-01-20 14:30:00',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Vue.js进阶测试',
+  //     description: '测试Vue.js进阶知识',
+  //     totalScore: 100,
+  //     passScore: 70,
+  //     createTime: '2024-01-21 15:45:00',
+  //   },
+  // ]
 })
 </script>
 

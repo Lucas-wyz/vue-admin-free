@@ -11,3 +11,6 @@ export { questionApi } from './modules/question'
 
 export { questionHistoryApi } from './modules/history'
 export type { questionHistory } from './types/questionHistory'
+
+export { paperApi } from './modules/paper'
+export type { Paper, PaperResponse } from './types/paper'
