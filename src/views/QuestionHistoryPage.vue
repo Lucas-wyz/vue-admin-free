@@ -38,6 +38,8 @@ const fetchHistory = async () => {
   try {
     let { data } = await questionHistoryApi.getHistoryList()
     historyRecords.value.push(...data)
+    loading.value = true
+    // const response = await questionApi.getQuestionHistory({
     //   page: currentPage.value,
     //   pageSize: pageSize.value,
     //   query: searchQuery.value

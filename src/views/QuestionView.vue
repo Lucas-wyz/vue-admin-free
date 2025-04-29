@@ -291,9 +291,7 @@ async function initQuestions() {
         result: null,
       }))
       // 随机打乱并截取指定数量的题目
-      questions.value = testQuestions
-        .sort(() => 0.5 - Math.random())
-        .slice(0, QUIZ_CONFIG.QUESTIONS_PER_QUIZ)
+      questions.value = testQuestions.slice(1, 2)
     }
   } catch (error) {
     ElMessage.error('获取题目失败：' + error.message)

@@ -308,7 +308,7 @@ const saveEdit = async () => {
       if (!currentQuestion.value || currentIndex.value === null) return
 
       console.log({ a: '修改', a1: currentQuestion.value })
-    questions1.value[currentIndex.value] = { ...currentQuestion.value }
+      questions1.value[currentIndex.value] = { ...currentQuestion.value }
 
       let val = currentQuestion.value
       questionApi.updateUser(String(val.id), val).then((x) => console.log({ ...x }))
@@ -333,7 +333,7 @@ const deleteQuestion = async (index: number) => {
     loading.value = true
     // 这里可以添加调用删除API的代码
     await questionApi.deleteQuestion(String(questions1.value[index].id))
-    // questions1.value.splice(index, 1)
+    questions1.value.splice(index, 1)
     ElMessage.success('删除成功')
   } catch (error) {
     if (error !== 'cancel') {
@@ -386,17 +386,47 @@ const removeOption = (index: number) => {
 
 // 添加题目
 const addQuestion = () => {
-  editDialogVisible.value = true
-  currentQuestion.value = {
-    options: [],
+  const newQuestion: Question = {
+    id: Date.now(), // 临时ID
+    question_type: 'single',
+    question_title: '',
+    options: [
+      {
+        id: Date.now() + 1,
+        question_id: Date.now(),
+        option_text: '',
+        option_value: 1,
+        sort_order: 1,
+        is_active: true,
+        correct: false,
+      },
+      {
+        id: Date.now() + 2,
+        question_id: Date.now(),
+        option_text: '',
+        option_value: 2,
+        sort_order: 2,
+        is_active: true,
+        correct: false,
+      },
+    ],
+    correct_answer: '',
+    explanation_text: '',
+    difficulty_level: 'easy',
+    category_id: 1,
+    category_name: '',
+    tag_ids: [],
+    tag_names: [],
+    is_active: true,
+    score_value: 1,
   }
+  editDialogVisible.value = true
+  currentQuestion.value = newQuestion
 }
 
 // 对话框关闭处理
 const handleDialogClose = () => {
   editDialogVisible.value = false
-  currentQuestion.value = null
-  currentIndex.value = null
 }
 
 const loading = ref(false)
@@ -406,9 +436,13 @@ const submitLoading = ref(false)
 <style scoped>
 .question-page {
   padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
 }
 .question-card {
   margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 .question-details h3 {
   margin-top: 16px;
@@ -436,5 +470,8 @@ const submitLoading = ref(false)
 }
 .el-button + .el-button {
   margin-left: 10px;
+}
+.dialog-footer {
+  text-align: right;
 }
 </style>
