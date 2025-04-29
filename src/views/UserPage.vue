@@ -3,7 +3,7 @@ import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
 import { userApi } from '@/api'
-import type { User, UserFormData } from '@/api'
+import type { User, UserFormData, Accounts } from '@/api'
 
 // 表格相关
 const loading = ref(false)
@@ -185,6 +185,30 @@ onMounted(() => {
 
 // 编辑账户密码
 const dialogVisiblePassword = ref(false)
+const passwordForm = ref<Accounts>({
+  id: null,
+  uid: null,
+  Name: null,
+  account: null,
+  password: null,
+})
+let handleEditPassword = async (user: User) => {
+  dialogVisiblePassword.value = true
+  let { data } = await userApi.getEdit(String(user.id))
+  passwordForm.value = { ...data, uid: String(user.id) }
+}
+let handleSubmit1 = async () => {
+  await userApi.postEdit(String(passwordForm.value.uid), passwordForm.value)
+  dialogVisiblePassword.value = false
+  ElMessage.success('密码重置成功')
+  passwordForm.value = {
+    id: null,
+    uid: null,
+    Name: null,
+    account: null,
+    password: null,
+  }
+}
 </script>
 
 <template>
@@ -227,7 +251,7 @@ const dialogVisiblePassword = ref(false)
           />
         </template>
       </el-table-column>
-      <el-table-column label="操作" width="180" fixed="right">
+      <el-table-column label="操作" width="240" fixed="right">
         <template #default="{ row }">
           <el-button type="primary" link @click="handleEdit(row)">
             <el-icon><i-ep-edit /></el-icon>编辑
@@ -235,8 +259,8 @@ const dialogVisiblePassword = ref(false)
           <el-button type="danger" link @click="handleDelete(row)">
             <el-icon><i-ep-delete /></el-icon>删除
           </el-button>
-          <el-button type="danger" link @click=" () => { dialogVisiblePassword = !dialogVisiblePassword }"          >
-            <el-icon><i-ep-delete /></el-icon>重置密码
+          <el-button type="danger" link @click="handleEditPassword(row)">
+            <el-icon><i-ep-editPen /></el-icon>重置密码
           </el-button>
         </template>
       </el-table-column>
@@ -292,17 +316,17 @@ const dialogVisiblePassword = ref(false)
 
     <!-- 用户表账号密码 -->
     <el-dialog v-model="dialogVisiblePassword" :title="'编辑密码'" width="500px" destroy-on-close>
-      <el-form ref="formRef" :model="formData" :rules="rules" label-width="100px">
+      <el-form ref="formRef" :model="passwordForm" :rules="rules" label-width="100px">
         <el-form-item label="账号">
-          <el-input />
+          <el-input v-model="passwordForm.account" type="text" />
         </el-form-item>
         <el-form-item label="密码">
-          <el-input />
+          <el-input v-model="passwordForm.password" type="password" show-password />
         </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisiblePassword = false">取消</el-button>
-        <el-button type="primary" :loading="submitting"> 确定 </el-button>
+        <el-button type="primary" @click="handleSubmit1" :loading="submitting"> 确定 </el-button>
       </template>
     </el-dialog>
   </div>
