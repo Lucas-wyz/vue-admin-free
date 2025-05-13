@@ -34,14 +34,11 @@
         <el-table-column type="selection" width="55" />
         <el-table-column prop="name" label="角色名称" min-width="120" show-overflow-tooltip />
         <el-table-column prop="description" label="描述" min-width="200" show-overflow-tooltip />
+        <el-table-column prop="permissions" label="权限" min-width="200" show-overflow-tooltip />
 
         <el-table-column label="状态" width="100" align="center">
           <template #default="{ row }">
-            <el-switch
-              v-model="row.is_active"
-              :loading="row.statusLoading"
-              @change="(val: boolean) => handleStatusChange(row, val)"
-            />
+            <el-switch v-model="row.is_active" />
           </template>
         </el-table-column>
         <el-table-column label="操作" width="180" fixed="right">
@@ -88,6 +85,9 @@
         </el-form-item>
         <el-form-item label="描述" prop="description">
           <el-input v-model="formData.description" type="textarea" />
+        </el-form-item>
+        <el-form-item label="权限" prop="permissions">
+          <el-input v-model="formData.permissions" type="textarea" />
         </el-form-item>
         <el-form-item label="状态" prop="is_active">
           <el-switch v-model="formData.is_active" />
@@ -235,6 +235,7 @@ const handleEdit = (role: Role) => {
   Object.assign(formData, {
     name: role.name,
     description: role.description,
+    permissions: role.permissions,
     is_active: role.is_active,
   })
   dialogVisible.value = true

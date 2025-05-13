@@ -2,7 +2,7 @@ export interface Role {
   id: number
   name: string
   description: string
-  permissions?: string[]
+  permissions: string
   created_at?: string
   updated_at?: string
   is_active: boolean
@@ -12,7 +12,7 @@ export interface Role {
 export interface RoleFormData {
   name: string
   description: string
-  permissions?: string[]
+  permissions: string
   is_active: boolean
   statusLoading: boolean
 }
