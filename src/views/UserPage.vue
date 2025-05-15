@@ -209,6 +209,15 @@ let handleSubmit1 = async () => {
     password: null,
   }
 }
+
+//编辑角色
+const dialogVisibleRole = ref(false)
+let handleEditRole = async (user: User) => {
+  dialogVisibleRole.value = true
+  // let { data } = await userApi.getEdit(String(user.id))
+  rolesarr.value = []
+}
+const rolesarr = ref([])
 </script>
 
 <template>
@@ -262,6 +271,9 @@ let handleSubmit1 = async () => {
           <el-button type="danger" link @click="handleEditPassword(row)">
             <el-icon><i-ep-editPen /></el-icon>重置密码
           </el-button>
+          <el-button type="danger" link @click="handleEditRole(row)">
+            <el-icon><i-ep-editPen /></el-icon>编辑角色
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -311,6 +323,26 @@ let handleSubmit1 = async () => {
       <template #footer>
         <el-button @click="dialogVisible = false">取消</el-button>
         <el-button type="primary" @click="handleSubmit" :loading="submitting"> 确定 </el-button>
+      </template>
+    </el-dialog>
+
+    <!-- 用户角色 -->
+    <el-dialog v-model="dialogVisibleRole" :title="'编辑角色'" width="500px" destroy-on-close>
+      <el-form ref="formRef" :model="passwordForm" :rules="rules" label-width="100px">
+        <el-form-item label="角色">
+          <el-select v-model="rolesarr" placeholder="选择角色" multiple style="width: 240px">
+            <el-option
+              v-for="(item, i) in ['admin', 'user', 'edit']"
+              :key="i"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <el-button @click="dialogVisibleRole = false">取消</el-button>
+        <el-button type="primary" :loading="submitting"> 确定 </el-button>
       </template>
     </el-dialog>
 
