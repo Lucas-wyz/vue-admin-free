@@ -1,5 +1,5 @@
 import { request } from '../request'
-import type { User, loginRes, loginUser, Accounts } from '../types/user'
+import type { User, loginRes, loginUser, Accounts, UserView } from '../types/user'
 import type { ApiPromise } from '../constants/responseCode'
 
 export const userApi = {
@@ -14,7 +14,7 @@ export const userApi = {
     return request.post('/api/login/Jwt', data)
   },
 
-  getUserList(): ApiPromise<User[]> {
+  getUserList(): ApiPromise<UserView[]> {
     return request.get('/api/Users')
   },
 
@@ -40,5 +40,8 @@ export const userApi = {
 
   postEdit(id: string, accounts: Accounts): ApiPromise<Accounts> {
     return request.post(`/api/Users/EditPassword/${id}`, accounts)
+  },
+  postEditRole(id: string, list: string[]): ApiPromise<Accounts> {
+    return request.post(`/api/Users/EditRole/${id}`, list)
   },
 }

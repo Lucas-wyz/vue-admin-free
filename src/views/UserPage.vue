@@ -2,8 +2,8 @@
 import { ref, reactive, computed, onMounted } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import type { FormInstance, FormRules } from 'element-plus'
-import { userApi } from '@/api'
-import type { User, UserFormData, Accounts } from '@/api'
+import { userApi, roleApi } from '@/api'
+import type { User, UserFormData, Accounts, RoleView, UserView } from '@/api'
 
 // 表格相关
 const loading = ref(false)
@@ -70,7 +70,7 @@ const handleSelectionChange = (val: User[]) => {
 }
 
 // 用户列表数据
-const users = ref<User[]>([])
+const users = ref<UserView[]>([])
 
 // 获取用户列表
 const fetchUsers = async () => {
@@ -212,12 +212,34 @@ let handleSubmit1 = async () => {
 
 //编辑角色
 const dialogVisibleRole = ref(false)
-let handleEditRole = async (user: User) => {
+const roleFrom = ref<UserView | null>(null)
+let handleEditRole = async (user: UserView) => {
+  console.log(user)
   dialogVisibleRole.value = true
   // let { data } = await userApi.getEdit(String(user.id))
-  rolesarr.value = []
+  rolesarr.value = user.roleList
+  roleFrom.value = user
 }
-const rolesarr = ref([])
+const rolesarr = ref<string[]>([])
+let edituserrole = async (uer: UserView) => {
+  let { data } = await userApi.postEditRole(uer.id, uer.roleList)
+
+  ElMessage.success('角色编辑成功')
+  dialogVisibleRole.value = false
+}
+let roleView = ref<RoleView[]>([])
+let getRoleView = async () => {
+  try {
+    let { data } = await roleApi.getRoleViewList()
+    roleView.value.push(...data)
+  } catch (error) {
+    ElMessage.error('获取角色详情失败：' + error.message)
+  }
+}
+
+onMounted(() => {
+  getRoleView()
+})
 </script>
 
 <template>
@@ -251,6 +273,13 @@ const rolesarr = ref([])
       <el-table-column prop="email" label="邮箱" />
       <el-table-column prop="phone" label="电话" />
       <el-table-column prop="address" label="地址" />
+      <el-table-column label="角色" width="100" align="center">
+        <template #default="{ row }">
+          <div v-for="a in row.roleList">
+            {{ roleView.find((item) => item.id === a)?.name || '未知角色' }}
+          </div>
+        </template>
+      </el-table-column>
       <el-table-column label="状态" width="100" align="center">
         <template #default="{ row }">
           <el-switch
@@ -328,21 +357,23 @@ const rolesarr = ref([])
 
     <!-- 用户角色 -->
     <el-dialog v-model="dialogVisibleRole" :title="'编辑角色'" width="500px" destroy-on-close>
-      <el-form ref="formRef" :model="passwordForm" :rules="rules" label-width="100px">
+      <el-form ref="formRef" :rules="rules" label-width="100px">
         <el-form-item label="角色">
-          <el-select v-model="rolesarr" placeholder="选择角色" multiple style="width: 240px">
-            <el-option
-              v-for="(item, i) in ['admin', 'user', 'edit']"
-              :key="i"
-              :label="item"
-              :value="item"
-            />
+          <el-select
+            v-model="roleFrom.roleList"
+            placeholder="选择角色"
+            multiple
+            style="width: 240px"
+          >
+            <el-option v-for="(item, i) in roleView" :key="i" :label="item.name" :value="item.id" />
           </el-select>
         </el-form-item>
       </el-form>
       <template #footer>
         <el-button @click="dialogVisibleRole = false">取消</el-button>
-        <el-button type="primary" :loading="submitting"> 确定 </el-button>
+        <el-button type="primary" @click="edituserrole(roleFrom)" :loading="submitting">
+          确定
+        </el-button>
       </template>
     </el-dialog>
 
