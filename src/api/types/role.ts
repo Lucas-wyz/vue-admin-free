@@ -1,5 +1,10 @@
+export interface RoleView {
+  id: string
+  name: string
+}
+
 export interface Role {
-  id: number
+  id: string
   name: string
   description: string
   permissions: string
@@ -10,6 +15,7 @@ export interface Role {
 }
 
 export interface RoleFormData {
+  id: string
   name: string
   description: string
   permissions: string
