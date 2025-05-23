@@ -132,19 +132,6 @@ const handleSearch = () => {
   fetchRoles()
 }
 
-// 处理状态变更
-const handleStatusChange = async (role: Role, value: boolean) => {
-  try {
-    role.statusLoading = true
-    await roleApi.updateRole(role.id, { is_active: value })
-    ElMessage.success('状态更新成功')
-  } catch (error) {
-    role.is_active = !value // 恢复状态
-    ElMessage.error('状态更新失败')
-  } finally {
-    role.statusLoading = false
-  }
-}
 
 // 批量删除
 const handleBatchDelete = async () => {
@@ -233,6 +220,7 @@ const handleCreate = () => {
 const handleEdit = (role: Role) => {
   formMode.value = 'edit'
   Object.assign(formData, {
+    id: role.id,
     name: role.name,
     description: role.description,
     permissions: role.permissions,
@@ -266,7 +254,7 @@ const handleSubmit = async () => {
         if (formMode.value === 'create') {
           await roleApi.createRole(formData)
         } else {
-          const currentRole = roles.value.find((r) => r.name === formData.name)
+          const currentRole = roles.value.find((r) => r.id === formData.id)
           if (currentRole) {
             await roleApi.updateRole(currentRole.id, formData)
           }
