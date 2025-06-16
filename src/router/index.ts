@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
@@ -9,7 +10,9 @@ const routes = [
   },
   {
     path: '/',
+    name: 'MainLayout',
     component: () => import('@/layouts/MainLayout.vue'),
+    meta: { title: '首页框架' },
     children: [
       {
         path: '',
@@ -85,6 +88,12 @@ const routes = [
     name: 'QuestionViewTest',
     component: () => import('@/views/QuestionViewTest.vue'),
     meta: { title: '答题页面3' },
+  },
+  {
+    path: '/QuestionOption',
+    name: 'QuestionOption',
+    component: () => import('@/views/QuestionOption.vue'),
+    meta: { title: '答题类型选择' },
   },
   {
     path: '/500',

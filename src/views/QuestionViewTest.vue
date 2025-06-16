@@ -12,6 +12,7 @@
         >
           {{ opet.question_type === 'single' ? '单选题' : '多选题' }}
         </el-tag>
+        <el-tag v-if="route.query.name">{{ route.query.name }}</el-tag>
         <span class="text-gray-400 text-sm">题目 #{{ opet.id }}</span>
       </div>
 
@@ -69,6 +70,10 @@ import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import type { Question } from '@/api/types/question'
 import { questionApi } from '@/api'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
 
 const opet = ref<Question | null>(null)
 
@@ -84,7 +89,7 @@ const toggleOption = (opt: any) => {
 // 获取题目
 const fetchQuestion = async () => {
   try {
-    const { data } = await questionApi.getRandom()
+    const { data } = await questionApi.getRandom({ category_name: route.query.name })
     opet.value = data
   } catch (error) {
     ElMessage.error('获取题目失败')

@@ -16,8 +16,8 @@ export const questionApi = {
     return request.put(`/api/Questions/${id}`, user)
   },
 
-  getRandom(): ApiPromise<Question> {
-    return request.get(`/api/Questions/GetRandom`)
+  getRandom(obj: Object): ApiPromise<Question> {
+    return request.get(`/api/Questions/GetRandom`, { params: { ...obj } })
   },
 
   verify(id: string, user: Partial<Question>): ApiPromise<Question> {
