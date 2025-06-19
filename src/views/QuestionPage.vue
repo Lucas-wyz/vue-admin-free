@@ -31,22 +31,15 @@
       <p>正确答案: {{ question.correct_answer }}</p>
       <p>解释: {{ question.explanation_text }}</p>
       <el-tag
+        v-if="question.tags"
         size="small"
-        :type="
-          question.difficulty_level === 'easy'
-            ? 'success'
-            : question.difficulty_level === 'medium'
-              ? 'warning'
-              : 'danger'
-        "
+        v-for="tag in question.tags"
+        :key="tag"
+        style="margin-left: 10px"
+        >{{ tag }}</el-tag
       >
-        {{ question.difficulty_level }}
-      </el-tag>
       <el-tag size="small" type="info" style="margin-left: 10px">{{
         question.category_name
-      }}</el-tag>
-      <el-tag v-for="tag in question.tag_names" :key="tag" size="small" style="margin-left: 5px">{{
-        tag
       }}</el-tag>
       <el-button @click="viewDetails(index)" type="primary" :loading="loading">查看详情</el-button>
       <el-button @click="editQuestion(index)" type="primary" plain :loading="loading"
@@ -69,6 +62,42 @@
         </el-form-item>
         <el-form-item label="题目标题">
           <el-input v-model="currentQuestion.question_title" type="textarea" :rows="2" />
+        </el-form-item>
+        <el-form-item label="题目标签">
+          <el-select
+            v-model="currentQuestion.tags"
+            placeholder="请选择"
+            size="large"
+            filterable
+            allow-create
+            multiple
+            clearable
+          >
+            <el-option
+              v-for="item in ['数学', '语文', '英语']"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="题目类别">
+          <!-- <el-input v-model="currentQuestion.category_name" :rows="2" /> -->
+
+          <el-select
+            v-model="currentQuestion.category_name"
+            placeholder="请选择"
+            size="large"
+            filterable
+            allow-create
+          >
+            <el-option
+              v-for="item in ['数学', '语文', '英语']"
+              :key="item"
+              :label="item"
+              :value="item"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="选项">
           <div v-for="(option, index) in currentQuestion.options" :key="index" class="option-item">
@@ -359,17 +388,20 @@ const viewDetails = (index: number) => {
 // 添加选项
 const addOption = () => {
   if (!currentQuestion.value) return
-  if (currentQuestion.value.options.length >= 6) {
+  if (currentQuestion.value.options?.length >= 6) {
     ElMessage.warning('最多只能添加6个选项')
     return
   }
   const newOption: Option = {
-    id: Date.now(), // 临时ID
+    // id: Date.now(), // 临时ID
     question_id: currentQuestion.value.id,
     option_text: '',
-    option_value: currentQuestion.value.options.length + 1,
-    sort_order: currentQuestion.value.options.length + 1,
+    option_value: currentQuestion.value.options?.length + 1,
+    sort_order: currentQuestion.value.options?.length + 1,
     is_active: true,
+  }
+  if ((currentQuestion.value.options?.length ?? 0) < 1) {
+    currentQuestion.value.options = []
   }
   currentQuestion.value.options.push(newOption)
 }
@@ -387,7 +419,7 @@ const removeOption = (index: number) => {
 // 添加题目
 const addQuestion = () => {
   const newQuestion: Question = {
-    id: Date.now(), // 临时ID
+    // id: Date.now(), // 临时ID
     question_type: 'single',
     question_title: '',
     options: [
