@@ -1,27 +1,22 @@
 <template>
   <el-container>
-    <el-aside>
-      <el-scrollbar height="600px">
-        <el-menu router :default-active="currentRoute" :collapse="isCollapse">
-          <el-menu-item>
-            <h1>{{ title }}</h1>
-          </el-menu-item>
-        </el-menu>
-
-        <el-menu router :default-active="currentRoute" :collapse="isCollapse">
-          <menu-recursive :menu-items="menus" />
-        </el-menu>
-      </el-scrollbar>
-    </el-aside>
+    <el-header>
+      <el-row class="w-full h-full">
+        <el-col :span="5" class=""> </el-col>
+        <el-col :span="15"> </el-col>
+        <el-col :span="4" class="h-full text-center">
+          <el-image style="" class="h-full rounded-full" :src="'user.png'" :fit="'fill'" />
+        </el-col>
+      </el-row>
+    </el-header>
     <el-container>
-      <el-header class="h-30">
-        <el-row class="w-full h-full">
-          <el-col :span="20"> </el-col>
-          <el-col :span="4" class="h-full text-center">
-            <el-image style="" class="h-full rounded-full" :src="'user.png'" :fit="'fill'" />
-          </el-col>
-        </el-row>
-      </el-header>
+      <el-aside>
+        <el-scrollbar height="600px">
+          <el-menu router :default-active="currentRoute" :collapse="isCollapse">
+            <menu-recursive :menu-items="menus" />
+          </el-menu>
+        </el-scrollbar>
+      </el-aside>
       <el-main class=" ">
         <el-scrollbar height="600px">
           <router-view></router-view>
@@ -56,4 +51,8 @@ onMounted(async () => {
 })
 </script>
 
-<style scoped></style>
+<style scoped>
+.el-menu {
+  border-right: none;
+}
+</style>
