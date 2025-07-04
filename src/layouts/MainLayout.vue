@@ -4,8 +4,10 @@
       <el-row class="w-full h-full">
         <el-col :span="5" class=""> </el-col>
         <el-col :span="15"> </el-col>
-        <el-col :span="4" class="h-full text-center">
-          <el-image style="" class="h-full rounded-full" :src="'user.png'" :fit="'fill'" />
+        <el-col :span="4" class="h-full">
+          <div class="h-full flex justify-center items-center">
+            <el-image class="rounded-full h-4/6" :src="'user.png'" />
+          </div>
         </el-col>
       </el-row>
     </el-header>
