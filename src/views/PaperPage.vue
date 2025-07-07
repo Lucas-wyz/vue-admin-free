@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { paperApi } from '@/api'
+import { paperApi, examsApi } from '@/api'
 import { useRouter } from 'vue-router'
-import type { Paper } from '@/api'
+import type { Paper, exams } from '@/api'
 
 // interface Paper {
 //   id: number
@@ -25,6 +25,7 @@ interface Option {
   content: string
 }
 
+const examsArr = ref<exams[]>([])
 const papers = ref<Paper[]>([])
 const router = useRouter()
 const selectedPaper = ref<Paper | null>(null)
@@ -64,9 +65,11 @@ const viewPaperDetails = async (paperId: number) => {
 }
 
 onMounted(async () => {
-  let { data } = await paperApi.getPaperList()
-  console.log(data)
-  papers.value = data
+  let { data } = await examsApi.getExamList()
+  examsArr.value = data
+  // let { data } = await paperApi.getPaperList()
+  // console.log(data)
+  // papers.value = data
   // 模拟数据，实际项目中应该通过 API 获取
   // papers.value = [
   //   {
@@ -98,13 +101,13 @@ onMounted(async () => {
         </div>
       </template>
 
-      <el-table :data="papers" style="width: 100%" border stripe>
+      <el-table :data="examsArr" style="width: 100%" border stripe>
         <el-table-column prop="id" label="ID" width="80" />
-        <el-table-column prop="title" label="试卷标题" width="180" />
-        <el-table-column prop="description" label="描述" />
-        <el-table-column prop="totalScore" label="总分" width="100" />
-        <el-table-column prop="passScore" label="及格分" width="100" />
-        <el-table-column prop="createTime" label="创建时间" width="180" />
+        <el-table-column prop="name" label="试卷标题" width="180" />
+        <!-- <el-table-column prop="description" label="描述" /> -->
+        <!-- <el-table-column prop="totalScore" label="总分" width="100" /> -->
+        <!-- <el-table-column prop="passScore" label="及格分" width="100" /> -->
+        <!-- <el-table-column prop="createTime" label="创建时间" width="180" /> -->
         <el-table-column label="操作" fixed="right" width="120">
           <template #default="{ row }">
             <el-button type="primary" link @click="viewPaperDetails(row.id)">
