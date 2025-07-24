@@ -13,6 +13,9 @@ export const userApi = {
   loginJwt(data: loginUser): ApiPromise<loginRes> {
     return request.post('/api/login/Jwt', data)
   },
+  loginAnonymousJwt(data: loginUser): ApiPromise<loginRes> {
+    return request.post('/api/login/AnonymousUsersJwt', data)
+  },
 
   getUserList(): ApiPromise<UserView[]> {
     return request.get('/api/Users')

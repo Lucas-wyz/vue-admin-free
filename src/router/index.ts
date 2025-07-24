@@ -9,6 +9,12 @@ const routes: RouteRecordRaw[] = [
     meta: { title: 'login', requiresAuth: false },
   },
   {
+    path: '/AnonymousLogin',
+    name: 'AnonymousLogin',
+    component: () => import('@/views/AnonymousLoginView.vue'),
+    meta: { title: '匿名登录', requiresAuth: false },
+  },
+  {
     path: '/',
     name: 'MainLayout',
     component: () => import('@/layouts/MainLayout.vue'),
