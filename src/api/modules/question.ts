@@ -20,7 +20,11 @@ export const questionApi = {
     return request.get(`/api/Questions/GetRandom`, { params: { ...obj } })
   },
 
-  verify(id: string, user: Partial<Question>): ApiPromise<Question> {
-    return request.post(`/api/Questions/verify/${id}`, user)
+  verify(
+    id: string,
+    user: Partial<Question>,
+    anonymousUsers: Boolean | null,
+  ): ApiPromise<Question> {
+    return request.post(`/api/Questions/verify/${id}`, { ...user, anonymousUsers })
   },
 }

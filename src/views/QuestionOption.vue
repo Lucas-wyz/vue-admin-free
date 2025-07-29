@@ -27,6 +27,7 @@ let chen = () => {
     name: 'QuestionViewTest',
     query: {
       name: obj.value,
+      anonymous: 'true',
     },
   })
 }

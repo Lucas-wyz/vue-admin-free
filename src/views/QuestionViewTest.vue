@@ -108,7 +108,13 @@ const submitAnswer = async () => {
   }
 
   try {
-    const { data } = await questionApi.verify(String(opet.value.id), { ...opet.value })
+    const { data } = await questionApi.verify(
+      String(opet.value.id),
+      {
+        ...opet.value,
+      },
+      route.query.anonymous as boolean | null,
+    )
 
     ElMessage({
       message: data ? '答案正确！' : '答案错误，请重试',
